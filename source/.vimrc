@@ -289,3 +289,11 @@ nnoremap <C-B> :Unite buffer<CR>
 " 最近仕様したファイル一覧
 nnoremap <C-L> :Unite file_mru<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 検証対象ファイルの指定
+let g:syntastic_mode_map = { 'mode': 'active',
+  \ 'active_filetypes': ['php'],
+  \ 'passive_filetypes': ['html'] }
+

@@ -159,6 +159,7 @@ Bundle 'tComment'
 Bundle 'Syntastic'
 Bundle 'yanktmp.vim'
 Bundle 'unite.vim'
+
 Bundle 'Smooth-Scroll'
 
 " NERD-Treeのプラグインは別途下記ディレクトリへインストール
@@ -245,6 +246,9 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+  \ 'active_filetypes': ['php'],
+  \ 'passive_filetypes': ['html'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
@@ -288,12 +292,4 @@ nnoremap <C-B> :Unite buffer<CR>
 
 " 最近仕様したファイル一覧
 nnoremap <C-L> :Unite file_mru<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 検証対象ファイルの指定
-let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': ['php'],
-  \ 'passive_filetypes': ['html'] }
 

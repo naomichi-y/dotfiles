@@ -1,0 +1,4 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/naomichi/Documents/projects/fortune/source/fortune_android'
+let g:netrw_dirhist_2='/Users/naomichi/Desktop/nomura/.git'

@@ -293,3 +293,4 @@ nnoremap <C-B> :Unite buffer<CR>
 " 最近仕様したファイル一覧
 nnoremap <C-L> :Unite file_mru<CR>
 
+" test

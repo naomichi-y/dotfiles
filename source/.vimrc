@@ -44,21 +44,10 @@ set fileformats=unix,dos,mac
 " シンタックスのハイライト
 syntax on
 
-" 全角空白、タブ文字、行末の空白を視覚化
-function! ActivateInvisibleIndicator()
-  syntax match InvisibleMultibyteSpace "　" display containedin=ALL
-  syntax match InvisibleTab "\t" display containedin=ALL
-  syntax match InvisibleEOLSpace "\s\+$" display containedin=ALL
-
-  " see: http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png
-  highlight InvisibleMultibyteSpace term=underline ctermbg=88
-  highlight InvisibleTab term=underline cterm=underline ctermfg=234
-  highlight InvisibleEOLSpace term=underline ctermbg=238
-endf
-
-augroup invisible
-  autocmd! invisible
-  autocmd BufNew,BufRead * call ActivateInvisibleIndicator()
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces ctermbg=8
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
 " カラースキーマの設定
@@ -154,12 +143,13 @@ Bundle 'gmarik/vundle'
 
 "Bundle 'smartchr.vim'
 Bundle 'eregex.vim'
-Bundle 'sudo.vim'
+"Bundle 'sudo.vim'
 Bundle 'tComment'
 Bundle 'Syntastic'
 Bundle 'yanktmp.vim'
 Bundle 'unite.vim'
 
+Bundle 'git://github.com/tpope/vim-surround.git'
 Bundle 'Smooth-Scroll'
 
 " NERD-Treeのプラグインは別途下記ディレクトリへインストール

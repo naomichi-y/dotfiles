@@ -1,7 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/usr/local/etc/nginx/sites-available'
 let g:netrw_dirhist_2='/Users/naomichi/Documents/projects/mars/1.13/libs/view/helper'
 let g:netrw_dirhist_3='/Users/naomichi/Documents/projects/fb_dating/source/webapp/modules/app/behaviors/member'
 let g:netrw_dirhist_4='/Users/naomichi/Documents/projects/fb_dating/specification/api-doc-bin'
 let g:netrw_dirhist_5='/Users/naomichi/Documents/projects/mars/1.15/vendors'
+let g:netrw_dirhist_6='/Users/naomichi/Documents/projects/fb_dating/source/webapp/libs/service'
+let g:netrw_dirhist_7='/Users/naomichi/Documents/projects/mars/1.15/libs/view'

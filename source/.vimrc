@@ -75,13 +75,16 @@ set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 " 'statusline'の情報を常にステータスラインに表示
 set laststatus=2
 
+" PHPのショートタグをハイライトから除外する
+let php_noShortTags = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 編集
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 高度なインデント
 set smartindent
 
-" シフトオペレータのインデント数 
+" シフトオペレータのインデント数
 set shiftwidth=2
 
 " タブの移動量
@@ -93,6 +96,9 @@ set expandtab
 " 範囲インデント変更後も選択を継続する
 vnoremap < <gv
 vnoremap > >gv
+
+" 行末の空白を保存時に削除
+autocmd BufWritePre * :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 操作
@@ -138,12 +144,14 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc('~/.vim/bundle')
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 "Bundle 'smartchr.vim'
 Bundle 'eregex.vim'
 "Bundle 'sudo.vim'
+
+" 複数行コメントアウト (対象行を選択した後に G+C)
 Bundle 'tComment'
 Bundle 'Syntastic'
 Bundle 'yanktmp.vim'

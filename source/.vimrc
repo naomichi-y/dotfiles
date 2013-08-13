@@ -285,6 +285,6 @@ map <silent> ,sP :call YanktmpPaste_P()<CR>
 nnoremap <C-B> :Unite buffer<CR>
 
 " 最近仕様したファイル一覧
-nnoremap <C-R> :Unite file_mru<CR>
+nnoremap <C-E> :Unite file_mru<CR>
 
 " test

@@ -16,12 +16,8 @@ set history=20
 set backspace=indent,eol,start
 
 " 前回閉じた行位置を記憶する
-if has("autocmd")
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
-endif
+autocmd BufWinLeave ?* silent mkview
+autocmd BufWinEnter ?* silent loadview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " エンコーディングと改行コード
@@ -289,6 +285,6 @@ map <silent> ,sP :call YanktmpPaste_P()<CR>
 nnoremap <C-B> :Unite buffer<CR>
 
 " 最近仕様したファイル一覧
-nnoremap <C-L> :Unite file_mru<CR>
+nnoremap <C-R> :Unite file_mru<CR>
 
 " test

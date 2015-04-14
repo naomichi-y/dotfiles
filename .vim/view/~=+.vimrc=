@@ -12,8 +12,6 @@ vnoremap <buffer> <silent> ][ m':exe "normal! gv"|call search('^\s*endf*\%[un
 nnoremap <buffer> <silent> ][ m':call search('^\s*endf*\%[unction]\>', "W")
 vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*fu\%[nction]\>', "W")
 nnoremap <buffer> <silent> ]] m':call search('^\s*fu\%[nction]\>', "W")
-setlocal keymap=
-setlocal noarabic
 setlocal noautoindent
 setlocal nobinary
 setlocal bufhidden=
@@ -23,11 +21,14 @@ setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
 setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
 setlocal commentstring=\"%s
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
 setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
 setlocal define=
@@ -78,8 +79,7 @@ setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
-setlocal norightleft
-setlocal rightleftcmd=search
+setlocal norelativenumber
 setlocal noscrollbind
 setlocal shiftwidth=2
 setlocal noshortname
@@ -98,19 +98,20 @@ setlocal syntax=vim
 endif
 setlocal tabstop=2
 setlocal tags=
-setlocal textwidth=78
+setlocal textwidth=0
 setlocal thesaurus=
+setlocal noundofile
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 85 - ((24 * winheight(0) + 24) / 48)
+let s:l = 145 - ((20 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-85
-normal! 014l
+145
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

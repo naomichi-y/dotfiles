@@ -141,37 +141,62 @@ set smartcase
 "set nowrapscan
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" Neo Bundle (https://github.com/Shougo/neobundle.vim)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+if has('vim_starting')
+ if &compatible
+   set nocompatible               " Be iMproved
+ endif
 
+ " Required:
+ set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Neo Bundle Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Bundle 'smartchr.vim'
 "Bundle 'eregex.vim'
 "Bundle 'sudo.vim'
 
-Bundle 'tComment'
-Bundle 'Syntastic'
-"Bundle 'yanktmp.vim'
-Bundle 'unite.vim'
+NeoBundle 'tComment'
+NeoBundle 'Syntastic'
+"NeoBundle 'yanktmp.vim'
+NeoBundle 'unite.vim'
 
 "Bundle 'git://github.com/tpope/vim-surround.git'
-Bundle 'Smooth-Scroll'
+NeoBundle 'Smooth-Scroll'
 
 " NERD-Treeのプラグインは別途下記ディレクトリへインストール
 " ~/.vim/bundle/bundle/The-NERD~/.vim/bundle/The-NERD-tree/-tree/nerdtree_plugin
-Bundle 'The-NERD-tree'
+NeoBundle 'The-NERD-tree'
 
-"Bundle 'buftabs'
-"Bundle 'git://github.com/Shougo/neocomplcache.git'
-"Bundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
-
-filetype plugin indent on
+"NeoBundle 'buftabs'
+"NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+"NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " smartchr

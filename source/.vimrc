@@ -86,6 +86,9 @@ set tabstop=2
 " TABキー押下時にスペースを挿入
 set expandtab
 
+" 文字列をペーストした際にインデントを無効にする
+set paste
+
 " 範囲インデント変更後も選択を継続する
 vnoremap < <gv
 vnoremap > >gv

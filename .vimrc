@@ -54,9 +54,6 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
 augroup END
 
-" カラースキーマの設定
-colorscheme molokai
-
 " 一部のマルチバイト文字を正しく認識させる
 set ambiwidth=double
 
@@ -178,25 +175,27 @@ NeoBundleCheck
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neo Bundle Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Bundle 'smartchr.vim'
-"Bundle 'eregex.vim'
-"Bundle 'sudo.vim'
 
+NeoBundle 'tomasr/molokai'
+"NeoBundle 'smartchr.vim'
+"NeoBundle 'eregex.vim'
+"NeoBundle 'sudo.vim'
 NeoBundle 'tComment'
 NeoBundle 'Syntastic'
 "NeoBundle 'yanktmp.vim'
 NeoBundle 'unite.vim'
-
 "Bundle 'git://github.com/tpope/vim-surround.git'
 NeoBundle 'Smooth-Scroll'
-
-" NERD-Treeのプラグインは別途下記ディレクトリへインストール
-" ~/.vim/bundle/bundle/The-NERD~/.vim/bundle/The-NERD-tree/-tree/nerdtree_plugin
-NeoBundle 'The-NERD-tree'
-
+NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
 "NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 "NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme molokai
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " smartchr

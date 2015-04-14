@@ -12,10 +12,7 @@ set noswapfile
 " コマンド履歴の保持数
 set history=20
 
-" バックスペースでインd年とや改行を削除できるようにする
-set backspace=indent,eol,start
-
-" 前回閉じた行位置を記憶する
+" Vimを閉じてもカーソル位置を記憶する
 if has("autocmd")
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -30,13 +27,13 @@ endif
 set encoding=utf-8
 
 " 出力エンコーディング
-set termencoding=utf-8
+set fileencoding=utf-8
 
 " ファイルを開く際に優先するエンコーディング
-set fileencodings=utf-8,iso-2022-jp,cp932
+set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 
-" 改行の自動認識
-set fileformats=unix,dos,mac
+" ファイルを開く際に優先する改行コード
+set fileformats=unix,mac,dos
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 表示
@@ -51,11 +48,7 @@ augroup HighlightTrailingSpaces
 augroup END
 
 " カラースキーマの設定
-"colorscheme solarized
 colorscheme molokai
-
-" 背景色
-"set background=dark
 
 " 一部のマルチバイト文字を正しく認識させる
 set ambiwidth=double
@@ -90,7 +83,7 @@ set shiftwidth=2
 " タブの移動量
 set tabstop=2
 
-" TABキーをスペースに変換
+" TABキー押下時にスペースを挿入
 set expandtab
 
 " 範囲インデント変更後も選択を継続する
@@ -99,6 +92,9 @@ vnoremap > >gv
 
 " 行末の空白を保存時に削除
 autocmd BufWritePre * :%s/\s\+$//e
+
+" 保存時にタブをスペースに変換
+autocmd BufWritePre * :%s/\t/  /ge
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 操作
@@ -148,16 +144,15 @@ call vundle#rc('~/.vim/bundle')
 Bundle 'gmarik/vundle'
 
 "Bundle 'smartchr.vim'
-Bundle 'eregex.vim'
+"Bundle 'eregex.vim'
 "Bundle 'sudo.vim'
 
-" 複数行コメントアウト (対象行を選択した後に G+C)
 Bundle 'tComment'
 Bundle 'Syntastic'
-Bundle 'yanktmp.vim'
+"Bundle 'yanktmp.vim'
 Bundle 'unite.vim'
 
-Bundle 'git://github.com/tpope/vim-surround.git'
+"Bundle 'git://github.com/tpope/vim-surround.git'
 Bundle 'Smooth-Scroll'
 
 " NERD-Treeのプラグインは別途下記ディレクトリへインストール
@@ -186,6 +181,74 @@ filetype plugin indent on
 "inoremap <buffer><expr> { smartchr#one_of(' {<cr>')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tComment
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 選択範囲を'c'キーでコメントアウト
+let g:tcommentMapLeaderOp1 = 'c'
+
+" 選択範囲を'C'キーでアンコメント
+let g:tcommentMapLeaderOp2 = 'C'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+  \ 'active_filetypes': ['php'],
+  \ 'passive_filetypes': ['html'] }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" yanktmp
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <silent> ,sy :call YanktmpYank()<CR>
+"map <silent> ,sp :call YanktmpPaste_p()<CR>
+"map <silent> ,sP :call YanktmpPaste_P()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" unite
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" バッファ一覧
+nnoremap <C-B> :Unite buffer<CR>
+
+" 最近仕様したファイル一覧
+nnoremap <C-L> :Unite file_mru<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" mooth-Scroll
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 設定項目は特になし
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimを引数なし、または'nerd'オプション付きで実行した場合はNERDTreeを起動
+if has('vim_starting')
+  let file_name = expand('%p')
+
+  if file_name == ''
+    autocmd VimEnter * NERDTreeFromBookmark ./
+  else
+    for i in argv()
+      if i == 'nerd'
+        autocmd VimEnter * execute 'NERDTree '.file_name
+      endif
+    endfor
+  endif
+endif
+
+" ファイルリストを開く
+nmap <F3> :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" buftabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:buftabs_only_basename=1
+"let g:buftabs_in_statusline=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplcache
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " プラグインの有効化
@@ -239,56 +302,4 @@ filetype plugin indent on
 " ユーザスニペットの格納ディレクトリ
 "let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': ['php'],
-  \ 'passive_filetypes': ['html'] }
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimを引数なし、または'nerd'オプション付きで実行した場合はNERDTreeを起動
-if has('vim_starting')
-  let file_name = expand('%p')
-
-  if file_name == ''
-    autocmd VimEnter * NERDTreeFromBookmark ./
-  else
-    for i in argv()
-      if i == 'nerd'
-        autocmd VimEnter * execute 'NERDTree '.file_name
-      endif
-    endfor
-  endif
-endif
-
-" ファイルリストを開く
-nmap <F3> :NERDTreeToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" buftabs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:buftabs_only_basename=1
-"let g:buftabs_in_statusline=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" yanktmp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> ,sy :call YanktmpYank()<CR>
-map <silent> ,sp :call YanktmpPaste_p()<CR>
-map <silent> ,sP :call YanktmpPaste_P()<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" unite
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" バッファ一覧
-nnoremap <C-B> :Unite buffer<CR>
-
-" 最近仕様したファイル一覧
-nnoremap <C-L> :Unite file_mru<CR>
-
-" test

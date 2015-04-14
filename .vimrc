@@ -183,7 +183,8 @@ NeoBundle 'tomasr/molokai'
 NeoBundle 'tComment'
 NeoBundle 'Syntastic'
 "NeoBundle 'yanktmp.vim'
-NeoBundle 'unite.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 "Bundle 'git://github.com/tpope/vim-surround.git'
 NeoBundle 'Smooth-Scroll'
 NeoBundle 'scrooloose/nerdtree'
@@ -216,10 +217,10 @@ colorscheme molokai
 " tComment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 選択範囲を'c'キーでコメントアウト
+" 選択範囲をコメントアウト
 let g:tcommentMapLeaderOp1 = 'c'
 
-" 選択範囲を'C'キーでアンコメント
+" 選択範囲をアンコメント
 let g:tcommentMapLeaderOp2 = 'C'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -239,13 +240,13 @@ let g:syntastic_mode_map = { 'mode': 'active',
 "map <silent> ,sP :call YanktmpPaste_P()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" unite
+" neomru.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" バッファ一覧
-nnoremap <C-B> :Unite buffer<CR>
+"  'unite-mru'でファイルの更新時間を表示
+let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
 
-" 最近仕様したファイル一覧
-nnoremap <C-L> :Unite file_mru<CR>
+" 最近開いたファイルの一覧を表示
+nnoremap <C-h> :Unite<Space>file_mru<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mooth-Scroll
@@ -256,23 +257,8 @@ nnoremap <C-L> :Unite file_mru<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimを引数なし、または'nerd'オプション付きで実行した場合はNERDTreeを起動
-if has('vim_starting')
-  let file_name = expand('%p')
-
-  if file_name == ''
-    autocmd VimEnter * NERDTreeFromBookmark ./
-  else
-    for i in argv()
-      if i == 'nerd'
-        autocmd VimEnter * execute 'NERDTree '.file_name
-      endif
-    endfor
-  endif
-endif
-
 " ファイルリストを開く
-nmap <F3> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " buftabs

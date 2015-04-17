@@ -1,5 +1,8 @@
 scriptencoding utf-8
 
+set runtimepath+=~/.vim
+runtime! autoload/*.conf
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 基本設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,9 +144,23 @@ set tabstop=2
 " TABキー押下時にスペースを挿入
 set expandtab
 
-" 文字列をペーストした際にインデントを無効にする
-" (有効にするとvim-smartinputが効かない)
-" set paste
+" クリップボードからのペーストを有効にする
+" (単に'set paste'を指定すると、vim-smartinputプラグインが動作しない問題がある)
+if &term =~ "xterm"
+  let &t_ti .= "\e[?2004h"
+  let &t_te .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
+
+  function XTermPasteBegin(ret)
+    set paste
+    return a:ret
+  endfunction
+
+  noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+  cnoremap <special> <Esc>[200~ <nop>
+  cnoremap <special> <Esc>[201~ <nop>
+endif
 
 " 範囲インデント変更後も選択を継続する
 vnoremap < <gv
@@ -174,7 +191,7 @@ set smartcase
 "set nowrapscan
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Neo Bundle (https://github.com/Shougo/neobundle.vim)
+" プラグイン (NeoBundle)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
@@ -209,7 +226,7 @@ filetype plugin indent on
 NeoBundleCheck
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Neo Bundle Plugins
+" プラグイン (NeoBundle Plugins)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 NeoBundle 'tomasr/molokai'
@@ -228,6 +245,17 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'romanvbabenko/rails.vim'
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
+
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \     'mac' : 'make -f make_mac.mak',
+  \    },
+  \ }
+NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
+  \ 'insert' : 1,
+  \ 'filetypes': 'ruby',
+  \ }}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " molokai
@@ -328,6 +356,31 @@ nnoremap <F3> :NERDTreeToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-smartinput-endwise"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" プラグインを有効化
+" 起動時にプラグインを有効化
 call smartinput_endwise#define_default_rules()
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neocomplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if g:enable_neocomplete == 1
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_ignore_case = 1
+  let g:neocomplete#enable_smart_case = 1
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns._ = '\h\w*'
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neocomplete-rsense
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if g:enable_neocomplete == 1
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+  let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+  " 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
+  let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'
+end

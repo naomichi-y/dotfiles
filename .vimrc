@@ -142,7 +142,8 @@ set tabstop=2
 set expandtab
 
 " 文字列をペーストした際にインデントを無効にする
-set paste
+" (有効にするとvim-smartinputが効かない)
+" set paste
 
 " 範囲インデント変更後も選択を継続する
 vnoremap < <gv
@@ -327,5 +328,6 @@ nnoremap <F3> :NERDTreeToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-smartinput-endwise"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"call smartinput_endwise#define_default_rules()
+" プラグインを有効化
+call smartinput_endwise#define_default_rules()
 

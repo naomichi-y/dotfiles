@@ -1,8 +1,10 @@
-Smooth-Scroll
 Syntastic
 molokai
 neobundle.vim
 neomru.vim
 nerdtree
+rails.vim
 tComment
 unite.vim
+vim-smartinput
+vim-smartinput-endwise

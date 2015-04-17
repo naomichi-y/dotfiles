@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 一般
+" 基本設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " バックアップを取らない
 set nobackup
@@ -20,7 +20,7 @@ if has("autocmd")
   \ endif
 endif
 
-" バックスペースでインd年とや改行を削除できるようにする
+" バックスペースキーでインデントや改行を削除できるように対応
 set backspace=indent,eol,start
 
 " 前回閉じた行位置を記憶する
@@ -28,7 +28,7 @@ autocmd BufWinLeave ?* silent mkview
 autocmd BufWinEnter ?* silent loadview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" エンコーディングと改行コード
+" エンコーディング
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 内部エンコーディング
 set encoding=utf-8
@@ -76,6 +76,57 @@ set laststatus=2
 let php_noShortTags = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 操作
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Anywhere SID.
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+" Set tabline.
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+  " 'T1'で1番左のタブ、'T2'で1番左から2番目のタブにジャンプ
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+
+" 'TC': 新しいタブを一番右に作る
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+
+" 'TX': タブを閉じる
+map <silent> [Tag]x :tabclose<CR>
+
+" 'TN': 次のタブ
+map <silent> [Tag]n :tabnext<CR>
+
+" 'TP': 前のタブ
+map <silent> [Tag]p :tabprevious<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 編集
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 高度なインデント
@@ -102,22 +153,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " 保存時にタブをスペースに変換
 autocmd BufWritePre * :%s/\t/  /ge
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 操作
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 次のタブに移動
-map <C-n> :tabn <Enter>
-
-" 前のタブに移動
-map <C-p> :tabp <Enter>
-
-" バッファを閉じる
-"map <C-e> :q!<Enter>
-
-" バッファ移動
-map <C-LEFT> <ESC>:bp!<CR>
-map <C-RIGHT> <ESC>:bn!<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 検索
@@ -186,14 +221,15 @@ NeoBundle 'Syntastic'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 "Bundle 'git://github.com/tpope/vim-surround.git'
-NeoBundle 'Smooth-Scroll'
+"NeoBundle 'Smooth-Scroll'
 NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
-"NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-"NeoBundle 'git://github.com/Shougo/neocomplcache-snippets-complete.git'
+NeoBundle 'romanvbabenko/rails.vim'
+NeoBundle "kana/vim-smartinput"
+NeoBundle "cohama/vim-smartinput-endwise"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" colorscheme
+" molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme molokai
@@ -214,13 +250,21 @@ colorscheme molokai
 "inoremap <buffer><expr> { smartchr#one_of(' {<cr>')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" eregex
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sudo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tComment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 選択範囲をコメントアウト
+" 'c': 選択範囲をコメントアウト
 let g:tcommentMapLeaderOp1 = 'c'
 
-" 選択範囲をアンコメント
+"'C':  選択範囲をアンコメント
 let g:tcommentMapLeaderOp2 = 'C'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -239,25 +283,31 @@ let g:syntastic_mode_map = { 'mode': 'active',
 "map <silent> ,sp :call YanktmpPaste_p()<CR>
 "map <silent> ,sP :call YanktmpPaste_P()<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" unite
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neomru.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  'unite-mru'でファイルの更新時間を表示
 let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
 
-" 最近開いたファイルの一覧を表示
+" 'Ctrl-H': 最近開いたファイルの一覧を表示
 nnoremap <C-h> :Unite<Space>file_mru<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-surround.git
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mooth-Scroll
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 設定項目は特になし
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
+" nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ファイルリストを開く
+" 'F3': ファイルリストを開く
 nnoremap <F3> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,57 +316,16 @@ nnoremap <F3> :NERDTreeToggle<CR>
 "let g:buftabs_only_basename=1
 "let g:buftabs_in_statusline=1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neocomplcache
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" プラグインの有効化
-"let g:neocomplcache_enable_at_startup = 1
-
-" ポップアップリストの長さ
-"let g:neocomplcache_max_list = 20
-
-" 日本語を補完候補として取得しない
-"if !exists('g:neocomplcache_keyword_patterns')
-"  let g:neocomplcache_keyword_patterns = {}
-"endif
-"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" キャッシュディレクトリ
-"let g:neocomplcache_temporary_dir = '/tmp/.neocon'
-
-" 辞書
-"let g:neocomplcache_dictionary_filetype_lists = {
-"  \ 'php' : $HOME.'/.vim/dict/php.dict',
-"  \ }
-
-"let g:neocomplcache_manual_completion_start_length = 3000
-
-" TABで補完
-"function InsertTabWrapper()
-"  if pumvisible()
-"    return "\<c-n>"
-"  endif
-"  let col = col('.') - 1
-"   if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-"     return "\<tab>"
-"   elseif exists('&omnifunc') && &omnifunc == ''
-"     return "\<c-n>"
-"   else
-"     return "\<c-x>\<c-o>"
-"   endif
-" endfunction
-" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" rails
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neocomplcache-snippets-complete.
+" vim-smartinput
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" スニペットを展開するキーマッピング
-"imap <C-k> <Plug>(neocomplcache_snippets_expand)
-"smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
-" 標準のスニペットを無効にする
-"let g:neocomplcache_snippets_disable_runtime_snippets = 1
-
-" ユーザスニペットの格納ディレクトリ
-"let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-smartinput-endwise"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"call smartinput_endwise#define_default_rules()
 

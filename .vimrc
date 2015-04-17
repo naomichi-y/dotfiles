@@ -211,22 +211,22 @@ NeoBundleCheck
 " Neo Bundle Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""NeoBundle 'tomasr/molokai'
+NeoBundle 'tomasr/molokai'
 "NeoBundle 'smartchr.vim'
 "NeoBundle 'eregex.vim'
 "NeoBundle 'sudo.vim'
-""NeoBundle 'tComment'
-""NeoBundle 'Syntastic'
+NeoBundle 'tComment'
+NeoBundle 'Syntastic'
 "NeoBundle 'yanktmp.vim'
-""NeoBundle 'Shougo/unite.vim'
-""NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 "Bundle 'git://github.com/tpope/vim-surround.git'
 "NeoBundle 'Smooth-Scroll'
-""NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
-""NeoBundle 'romanvbabenko/rails.vim'
-""NeoBundle "kana/vim-smartinput"
-""NeoBundle "cohama/vim-smartinput-endwise"
+NeoBundle 'romanvbabenko/rails.vim'
+NeoBundle "kana/vim-smartinput"
+NeoBundle "cohama/vim-smartinput-endwise"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " molokai

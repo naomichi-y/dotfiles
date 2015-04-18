@@ -363,14 +363,24 @@ call smartinput_endwise#define_default_rules()
 " neocomplete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if g:enable_neocomplete == 1
+  " 起動時にプラグインを有効化
   let g:neocomplete#enable_at_startup = 1
+
+  " ポップアップで表示する候補の数
+  let neocomplcache_max_list = 20
+
+  " 補完検索時に大文字・小文字を無視する
   let g:neocomplete#enable_ignore_case = 1
+
+  " 大文字が入力された場合に大文字・小文字を区別する
   let g:neocomplete#enable_smart_case = 1
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns._ = '\h\w*'
 endif
+
+" 'Enter'で補完を確定
+function! s:my_crinsert()
+  return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
+endfunction
+inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete-rsense

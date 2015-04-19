@@ -249,13 +249,15 @@ NeoBundle "cohama/vim-smartinput-endwise"
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
-  \     'mac' : 'make -f make_mac.mak',
-  \    },
+  \   'mac' : 'make -f make_mac.mak',
   \ }
-NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
+  \ }
+NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
+  \ 'autoload' : {
   \ 'insert' : 1,
   \ 'filetypes': 'ruby',
-  \ }}
+  \ }
+  \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " molokai
@@ -366,8 +368,8 @@ if g:enable_neocomplete == 1
   " 起動時にプラグインを有効化
   let g:neocomplete#enable_at_startup = 1
 
-  " ポップアップで表示する候補の数
-  let neocomplcache_max_list = 20
+  " 補完を開始する文字数
+  let g:neocomplete#auto_completion_start_length = 3
 
   " 補完検索時に大文字・小文字を無視する
   let g:neocomplete#enable_ignore_case = 1

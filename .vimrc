@@ -304,8 +304,9 @@ let g:tcommentMapLeaderOp2 = 'C'
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': ['php'],
-  \ 'passive_filetypes': ['html'] }
+  \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
+  \ 'passive_filetypes': []
+  \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " yanktmp

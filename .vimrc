@@ -242,22 +242,26 @@ NeoBundle 'Shougo/neomru.vim'
 "NeoBundle 'Smooth-Scroll'
 NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
+
 NeoBundle 'romanvbabenko/rails.vim'
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
 
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \   'mac' : 'make -f make_mac.mak',
-  \ }
-  \ }
-NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
-  \ 'autoload' : {
-  \ 'insert' : 1,
-  \ 'filetypes': 'ruby',
-  \ }
-  \ }
+if g:enable_neocomplete == 1
+  NeoBundle 'Shougo/neocomplete'
+  NeoBundle 'Shougo/vimproc', {
+    \ 'build' : {
+    \   'mac' : 'make -f make_mac.mak',
+    \   'linux' : 'make'
+    \ }
+    \ }
+  NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
+    \ 'autoload' : {
+    \ 'insert' : 1,
+    \ 'filetypes': 'ruby',
+    \ }
+    \ }
+end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " molokai
@@ -362,19 +366,17 @@ call smartinput_endwise#define_default_rules()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if g:enable_neocomplete == 1
-  " 起動時にプラグインを有効化
-  let g:neocomplete#enable_at_startup = 1
+" 起動時にプラグインを有効化
+let g:neocomplete#enable_at_startup = 1
 
-  " 補完を開始する文字数
-  let g:neocomplete#auto_completion_start_length = 3
+" 補完を開始する文字数
+let g:neocomplete#auto_completion_start_length = 3
 
-  " 補完検索時に大文字・小文字を無視する
-  let g:neocomplete#enable_ignore_case = 1
+" 補完検索時に大文字・小文字を無視する
+let g:neocomplete#enable_ignore_case = 1
 
-  " 大文字が入力された場合に大文字・小文字を区別する
-  let g:neocomplete#enable_smart_case = 1
-endif
+" 大文字が入力された場合に大文字・小文字を区別する
+let g:neocomplete#enable_smart_case = 1
 
 " 'Enter'で補完を確定
 function! s:my_crinsert()
@@ -385,12 +387,10 @@ inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete-rsense
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if g:enable_neocomplete == 1
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
-  " 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
-  let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'
-end
+" 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
+let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'

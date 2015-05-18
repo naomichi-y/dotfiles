@@ -1,0 +1,1 @@
+/Users/naomichi_yamakita_pn082/Projects/dotfiles/.vim

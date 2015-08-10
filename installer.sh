@@ -1,11 +1,12 @@
 #!/bin/bash
 
-curdir=$(pwd)
+base_dir=$(cd $(dirname $0);pwd)
+#curdir=$(pwd)
 
 # Setup vim
-ln -s $curdir/.vim ~/.vim
-ln -s $curdir/.vimrc ~/.vimrc
-$curdir/.vim/bundle/neobundle.vim/bin/neoinstall
+ln -s $base_dir/.vim ~/.vim
+ln -s $base_dir/.vimrc ~/.vimrc
+$base_dir/.vim/bundle/neobundle.vim/bin/neoinstall
 
 # Setup git
 ln -s $curdir/.gitconfig ~/.gitconfig

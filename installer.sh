@@ -9,6 +9,6 @@ ln -s $base_dir/.vimrc ~/.vimrc
 $base_dir/.vim/bundle/neobundle.vim/bin/neoinstall
 
 # Setup git
-ln -s $curdir/.gitconfig ~/.gitconfig
+ln -s $base_dir/.gitconfig ~/.gitconfig
 
 echo 'Install success.'

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+BASE_DIR=$(cd $(dirname $0);pwd)
+
+# Setup vim
+ln -s $BASE_DIR/.vim ~/.vim
+ln -s $BASE_DIR/.vimrc ~/.vimrc
+$BASE_DIR/.vim/bundle/neobundle.vim/bin/neoinstall
+
+# Setup git
+ln -s $BASE_DIR/.gitconfig ~/.gitconfig
+
+ln -s $BASE_DIR/zshrc ~/.zshrc
+
+echo 'Install success.'

@@ -10,6 +10,7 @@ $BASE_DIR/.vim/bundle/neobundle.vim/bin/neoinstall
 # Setup git
 ln -s $BASE_DIR/.gitconfig ~/.gitconfig
 
-ln -s $BASE_DIR/zshrc ~/.zshrc
+# Setup Zsh
+ln -s $BASE_DIR/.zshrc ~/.zshrc
 
 echo 'Install success.'

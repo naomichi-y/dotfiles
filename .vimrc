@@ -27,8 +27,8 @@ endif
 set backspace=indent,eol,start
 
 " 前回閉じた行位置を記憶する
-autocmd BufWinLeave ?* silent mkview
-autocmd BufWinEnter ?* silent loadview
+" autocmd BufWinLeave ?* silent mkview
+" autocmd BufWinEnter ?* silent loadview
 
 " 現在のディレクトリに.vimrc.localファイルがあれば優先して読み込む
 augroup vimrc-local
@@ -145,6 +145,9 @@ map <silent> [Tag]p :tabprevious<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 編集
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自動改行の有効化
+set autoindent
+
 " 高度なインデント
 set smartindent
 

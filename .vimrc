@@ -30,6 +30,19 @@ set backspace=indent,eol,start
 autocmd BufWinLeave ?* silent mkview
 autocmd BufWinEnter ?* silent loadview
 
+" 現在のディレクトリに.vimrc.localファイルがあれば優先して読み込む
+augroup vimrc-local
+  autocmd!
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " エンコーディング
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,10 +400,10 @@ inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete-rsense
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"   let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 " 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
-let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'
+" let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'

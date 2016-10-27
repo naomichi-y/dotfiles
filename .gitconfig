@@ -9,6 +9,8 @@
   ci = commit
   st = status
   br = branch
+  delete-merged-branch = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
+
 
 # [filter "lfs"]
 # 	clean = git lfs clean %f

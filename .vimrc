@@ -51,11 +51,11 @@ set fileformats=unix,mac,dos
 " シンタックスのハイライト
 syntax on
 
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces ctermbg=8
-  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
-augroup END
+" augroup HighlightTrailingSpaces
+"   autocmd!
+"   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces ctermbg=8
+"   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+" augroup END
 
 " 一部のマルチバイト文字を正しく認識させる
 set ambiwidth=double
@@ -268,6 +268,7 @@ end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme molokai
+hi Comment ctermfg=245
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " smartchr

@@ -261,7 +261,7 @@ NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
 
 NeoBundle 'romanvbabenko/rails.vim'
-NeoBundle "kana/vim-smartinput"
+"NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
 
 if g:enable_neocomplete == 1

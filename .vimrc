@@ -30,19 +30,6 @@ set backspace=indent,eol,start
 " autocmd BufWinLeave ?* silent mkview
 " autocmd BufWinEnter ?* silent loadview
 
-" 現在のディレクトリに.vimrc.localファイルがあれば優先して読み込む
-augroup vimrc-local
-  autocmd!
-  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
-augroup END
-
-function! s:vimrc_local(loc)
-  let files = findfile('.vimrc', escape(a:loc, ' ') . ';', -1)
-  for i in reverse(filter(files, 'filereadable(v:val)'))
-    source `=i`
-  endfor
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " エンコーディング
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -256,9 +243,9 @@ NeoBundle 'Syntastic'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 "Bundle 'git://github.com/tpope/vim-surround.git'
-"NeoBundle 'Smooth-Scroll'
 NeoBundle 'scrooloose/nerdtree'
 "NeoBundle 'buftabs'
+NeoBundle 'embear/vim-localvimrc'
 
 NeoBundle 'romanvbabenko/rails.vim'
 NeoBundle "kana/vim-smartinput"
@@ -369,6 +356,12 @@ nnoremap <F3> :NERDTreeToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:buftabs_only_basename=1
 "let g:buftabs_in_statusline=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-localvimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:localvimrc_persistent=2
+let g:localvimrc_sandbox=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rails

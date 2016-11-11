@@ -37,7 +37,7 @@ augroup vimrc-local
 augroup END
 
 function! s:vimrc_local(loc)
-  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  let files = findfile('.vimrc', escape(a:loc, ' ') . ';', -1)
   for i in reverse(filter(files, 'filereadable(v:val)'))
     source `=i`
   endfor

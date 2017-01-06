@@ -1,4 +1,1 @@
-
-.vim/view/*
-.vim/.netrwhist
-.vim/bundle/*
+.vim

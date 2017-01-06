@@ -1,7 +1,6 @@
 scriptencoding utf-8
 
 set runtimepath+=~/.vim
-runtime! autoload/*.conf
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 基本設定
@@ -48,9 +47,6 @@ set fileformats=unix,mac,dos
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 表示
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" シンタックスのハイライト
-syntax on
-
 " 行末のスペースを視覚化
 augroup HighlightTrailingSpaces
   autocmd!
@@ -195,190 +191,38 @@ set smartcase
 "set nowrapscan
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" プラグイン (NeoBundle)
+" プラグインマネージャ
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Note: Skip initialization for vim-tiny or vim-small.
-if !1 | finish | endif
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=~/repos/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim
 
-if has('vim_starting')
- if &compatible
-   set nocompatible               " Be iMproved
- endif
+call dein#begin(expand('~/.vim/dein'))
 
- " Required:
- set runtimepath+=~/.vim/bundle/neobundle.vim/
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+
+call dein#add('Shougo/neocomplete.vim', { 'on_i': 1 })
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/neomru.vim')
+call dein#add('tomasr/molokai')
+call dein#add('tComment')
+call dein#add('Syntastic')
+call dein#add('scrooloose/nerdtree')
+call dein#add('embear/vim-localvimrc')
+call dein#add('kana/vim-smartinput')
+call dein#add('cohama/vim-smartinput-endwise')
+
+call dein#end()
+
+if dein#check_install()
+  call dein#install()
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" プラグイン (NeoBundle Plugins)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-NeoBundle 'tomasr/molokai'
-"NeoBundle 'smartchr.vim'
-"NeoBundle 'eregex.vim'
-"NeoBundle 'sudo.vim'
-NeoBundle 'tComment'
-NeoBundle 'Syntastic'
-"NeoBundle 'yanktmp.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-"Bundle 'git://github.com/tpope/vim-surround.git'
-NeoBundle 'scrooloose/nerdtree'
-"NeoBundle 'buftabs'
-NeoBundle 'embear/vim-localvimrc'
-
-NeoBundle 'romanvbabenko/rails.vim'
-NeoBundle "kana/vim-smartinput"
-NeoBundle "cohama/vim-smartinput-endwise"
-
-if g:enable_neocomplete == 1
-  NeoBundle 'Shougo/neocomplete'
-  NeoBundle 'Shougo/vimproc', {
-    \ 'build' : {
-    \   'mac' : 'make -f make_mac.mak',
-    \   'linux' : 'make'
-    \ }
-    \ }
-  NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', {
-    \ 'autoload' : {
-    \ 'insert' : 1,
-    \ 'filetypes': 'ruby',
-    \ }
-    \ }
-end
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" molokai
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-colorscheme molokai
-
-" カラースキームのオーバーライド
-hi Comment ctermfg=245
-hi Visual ctermbg=239
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" smartchr
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"inoremap <buffer><expr> + smartchr#one_of(' + ', '++', ' += ')
-"inoremap <buffer><expr> - smartchr#one_of(' - ', '--', ' -= ')
-"inoremap <buffer><expr> / smartchr#one_of(' / ', '// ',  '/')
-"inoremap <buffer><expr> * smartchr#one_of(' * ', '** ')
-"inoremap <buffer><expr> & smartchr#one_of(' & ', ' && ')
-"inoremap <buffer><expr> % smartchr#one_of(' % ')
-"inoremap <buffer><expr> <bar> smartchr#one_of(' <bar> ',  ' <bar><bar> ')
-"inoremap <buffer><expr> , smartchr#one_of(', ', ',')
-"inoremap <buffer><expr> . smartchr#one_of(' . ', '. ')
-"inoremap <buffer><expr> = smartchr#one_of(' = ', ' == ', ' === ')
-"inoremap <buffer><expr> { smartchr#one_of(' {<cr>')
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" eregex
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" sudo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tComment
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 'c': 選択範囲をコメントアウト (またはアンコメント)
-let g:tcommentMapLeaderOp1 = 'c'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_mode_map = { 'mode': 'active',
-  \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
-  \ 'passive_filetypes': []
-  \ }
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" yanktmp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <silent> ,sy :call YanktmpYank()<CR>
-"map <silent> ,sp :call YanktmpPaste_p()<CR>
-"map <silent> ,sP :call YanktmpPaste_P()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" unite
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neomru.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  'unite-mru'でファイルの更新時間を表示
-let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
-
-" 'Ctrl-H': 最近開いたファイルの一覧を表示
-nnoremap <C-h> :Unite<Space>file_mru<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-surround.git
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" mooth-Scroll
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 'F3': ファイルリストを開く
-nnoremap <F3> :NERDTreeToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" buftabs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:buftabs_only_basename=1
-"let g:buftabs_in_statusline=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-localvimrc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:localvimrc_persistent=2
-let g:localvimrc_sandbox=0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" rails
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-smartinput
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-smartinput-endwise"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 起動時にプラグインを有効化
-call smartinput_endwise#define_default_rules()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neocomplete
+" Shougo/neocomplete
+"   * neocomplete.vimの実行にはVimのluaを有効化しておく必要がある
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 起動時にプラグインを有効化
 let g:neocomplete#enable_at_startup = 1
@@ -398,13 +242,66 @@ function! s:my_crinsert()
 endfunction
 inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" unite
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neocomplete-rsense
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" if !exists('g:neocomplete#force_omni_input_patterns')
-"   let g:neocomplete#force_omni_input_patterns = {}
-" endif
-" let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
-" 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
-" let g:neocomplete#sources#rsense#home_directory = '/usr/local/Cellar/rsense/0.3'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neomru.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  'unite-mru'でファイルの更新時間を表示
+let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
+
+" 'Ctrl-H': 最近開いたファイルの一覧を表示
+nnoremap <C-h> :Unite<Space>file_mru<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" molokai
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+colorscheme molokai
+
+" カラースキームのオーバーライド
+hi Comment ctermfg=245
+hi Visual ctermbg=239
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tComment
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 'c': 選択範囲をコメントアウト (またはアンコメント)
+let g:tcommentMapLeaderOp1 = 'c'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'active',
+  \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
+  \ 'passive_filetypes': []
+  \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdtree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 'F3': ファイルリストを開く
+nnoremap <F3> :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-localvimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:localvimrc_persistent=2
+let g:localvimrc_sandbox=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-smartinput
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-smartinput-endwise
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 起動時にプラグインを有効化
+call smartinput_endwise#define_default_rules()
+
+

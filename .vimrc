@@ -1,33 +1,22 @@
 scriptencoding utf-8
 
-set runtimepath+=~/.vim
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 基本設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" バックアップを取らない
 set nobackup
-
-" スワップファイルを作成しない
 set noswapfile
-
-" コマンド履歴の保持数
 set history=20
 
-" Vimを閉じてもカーソル位置を記憶する
+" バックスペースキーでインデントや改行を削除できるように対応
+set backspace=indent,eol,start
+
+" カーソル位置を記憶する
 if has("autocmd")
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal! g'\"" |
   \ endif
 endif
-
-" バックスペースキーでインデントや改行を削除できるように対応
-set backspace=indent,eol,start
-
-" 前回閉じた行位置を記憶する
-" autocmd BufWinLeave ?* silent mkview
-" autocmd BufWinEnter ?* silent loadview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " エンコーディング
@@ -57,95 +46,55 @@ augroup END
 " 一部のマルチバイト文字を正しく認識させる
 set ambiwidth=double
 
-" 常にカーソル位置から指定行数を空ける
-set scrolloff=20
+" カーソル行を基準にn行を視野に入れる
+set scrolloff=30
 
-" 対応する括弧を表示
+" 対応する括弧をハイライト
 set showmatch
 
 " 行番号を非表示にする
 set nonumber
 
-" ステータスラインにエンコーディングや改行コード情報を表示
-set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
-
-" 'statusline'の情報を常にステータスラインに表示
+" ステータスラインの有効化
 set laststatus=2
 
-" PHPのショートタグをハイライトから除外する
+" ステータスラインにファイルの情報を表示
+set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
+
+" PHPのショートタグをハイライトから除外
 let php_noShortTags = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 操作
+" 検索
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
+" インクリメンタルサーチの有効化
+set incsearch
 
-" Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
+" 検索にマッチするすべてのキーワードをハイライト化
+set hlsearch
 
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap    t [Tag]
-" Tab jump
-for n in range(1, 9)
-  " 'T1'で1番左のタブ、'T2'で1番左から2番目のタブにジャンプ
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
+" 大文字・小文字の違いを無視する
+set ignorecase
 
-" 'TC': 新しいタブを一番右に作る
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-
-" 'TX': タブを閉じる
-map <silent> [Tag]x :tabclose<CR>
-
-" 'TN': 次のタブ
-map <silent> [Tag]n :tabnext<CR>
-
-" 'TP': 前のタブ
-map <silent> [Tag]p :tabprevious<CR>
+" 大文字を含めた検索時は大文字・小文字を区別する
+set smartcase
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 編集
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自動改行の有効化
-set autoindent
-
-" 高度なインデント
+" 改行時に前の行に合わせてインデントを行う
 set smartindent
 
-" シフトオペレータのインデント数
+" シフトオペレータで挿入するインデント幅
 set shiftwidth=2
 
-" タブの移動量
-set tabstop=2
+" TABキーのインデント幅
+set tabstop=4
 
-" TABキー押下時にスペースを挿入
+" TABキーでスペースを挿入
 set expandtab
 
-" クリップボードからのペーストを有効にする
-" (単に'set paste'を指定すると、vim-smartinputプラグインが動作しない問題がある)
+" クリップボードからのペーストを有効化
 if &term =~ "xterm"
   let &t_ti .= "\e[?2004h"
   let &t_te .= "\e[?2004l"
@@ -162,33 +111,66 @@ if &term =~ "xterm"
   cnoremap <special> <Esc>[201~ <nop>
 endif
 
-" 範囲インデント変更後も選択を継続する
+" 範囲インデント適用後も選択範囲を有効化
 vnoremap < <gv
 vnoremap > >gv
 
-" 行末の空白を保存時に削除
+" ファイル保存時に行末の空白を削除
 "autocmd BufWritePre * :%s/\s\+$//e
 
-" 保存時にタブをスペースに変換
+" ファイル保存時にタブをスペースに変換
 "autocmd BufWritePre * :%s/\t/  /ge
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 検索
+" 操作
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" インクリメンタルサーチを有効化
-set incsearch
-
-" 検索にマッチするすべてのキーワードをハイライト化
-set hlsearch
-
-" 検索時の大文字・小文字を無視する
-set ignorecase
-
-" 大文字を含めた検索時のみ大文字・小文字を区別する
-set smartcase
-
-" 検索後にファイルの先頭へループしない
-"set nowrapscan
+" " Anywhere SID.
+" function! s:SID_PREFIX()
+"   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+" endfunction
+"
+" " Set tabline.
+" function! s:my_tabline()  "{{{
+"   let s = ''
+"   for i in range(1, tabpagenr('$'))
+"     let bufnrs = tabpagebuflist(i)
+"     let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+"     let no = i  " display 0-origin tabpagenr.
+"     let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+"     let title = fnamemodify(bufname(bufnr), ':t')
+"     let title = '[' . title . ']'
+"     let s .= '%'.i.'T'
+"     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+"     let s .= no . ':' . title
+"     let s .= mod
+"     let s .= '%#TabLineFill# '
+"   endfor
+"   let s .= '%#TabLineFill#%T%=%#TabLine#'
+"   return s
+" endfunction "}}}
+" let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+" set showtabline=2 " 常にタブラインを表示
+"
+" " The prefix key.
+" nnoremap    [Tag]   <Nop>
+" nmap    t [Tag]
+" " Tab jump
+" for n in range(1, 9)
+"   " 'T1'で1番左のタブ、'T2'で1番左から2番目のタブにジャンプ
+"   execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+" endfor
+"
+" " 'TC': 新しいタブを一番右に作る
+" map <silent> [Tag]c :tablast <bar> tabnew<CR>
+"
+" " 'TX': タブを閉じる
+" map <silent> [Tag]x :tabclose<CR>
+"
+" " 'TN': 次のタブ
+" map <silent> [Tag]n :tabnext<CR>
+"
+" " 'TP': 前のタブ
+" map <silent> [Tag]p :tabprevious<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " プラグインマネージャ
@@ -196,7 +178,7 @@ set smartcase
 if &compatible
   set nocompatible
 endif
-set runtimepath+=~/repos/dotfiles/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
 call dein#begin(expand('~/.vim/dein'))
 
@@ -211,8 +193,8 @@ call dein#add('tComment')
 call dein#add('Syntastic')
 call dein#add('scrooloose/nerdtree')
 call dein#add('embear/vim-localvimrc')
-call dein#add('kana/vim-smartinput')
-call dein#add('cohama/vim-smartinput-endwise')
+call dein#add('Yggdroot/indentLine')
+call dein#add('airblade/vim-gitgutter')
 
 call dein#end()
 
@@ -222,7 +204,7 @@ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shougo/neocomplete
-"   * neocomplete.vimの実行にはVimのluaを有効化しておく必要がある
+"   * neocomplete.vimの実行にはVimのluaを有効化しておく
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 起動時にプラグインを有効化
 let g:neocomplete#enable_at_startup = 1
@@ -243,27 +225,27 @@ endfunction
 inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" unite
+" Shougo/unite
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neomru.vim
+" Shougo/neomru.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  'unite-mru'でファイルの更新時間を表示
+" ファイルの更新時間を表示
 let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
 
-" 'Ctrl-H': 最近開いたファイルの一覧を表示
-nnoremap <C-h> :Unite<Space>file_mru<CR>
+" 'F3': 最近開いたファイルの一覧を表示
+nnoremap <F3> :Unite<Space>file_mru<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" molokai
+" tomasr/molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 colorscheme molokai
 
 " カラースキームのオーバーライド
+hi Delimiter ctermfg=245
 hi Comment ctermfg=245
-hi Visual ctermbg=239
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tComment
@@ -283,25 +265,29 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
+" scrooloose/nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 'F3': ファイルリストを開く
-nnoremap <F3> :NERDTreeToggle<CR>
+" 隠しファイルを表示
+let NERDTreeShowHidden = 1
+
+" 'F4': ファイルリストを開く
+nnoremap <F4> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-localvimrc
+" embear/vim-localvimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ローカル.vimrcを自動で読み込む
 let g:localvimrc_persistent=2
+
+" ローカル.vimrcを有効化
 let g:localvimrc_sandbox=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-smartinput
+" Yggdroot/indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" インデントの深さを表す色
+let g:indentLine_color_term = 239
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-smartinput-endwise
+" airblade/vim-gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 起動時にプラグインを有効化
-call smartinput_endwise#define_default_rules()
-
-

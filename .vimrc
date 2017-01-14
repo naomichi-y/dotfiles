@@ -36,13 +36,6 @@ set fileformats=unix,mac,dos
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 表示
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 行末のスペースを視覚化
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces ctermbg=8
-  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
-augroup END
-
 " 一部のマルチバイト文字を正しく認識させる
 set ambiwidth=double
 
@@ -52,8 +45,8 @@ set scrolloff=30
 " 対応する括弧をハイライト
 set showmatch
 
-" 行番号を非表示にする
-set nonumber
+" 行番号を表示
+set number
 
 " ステータスラインの有効化
 set laststatus=2
@@ -195,6 +188,9 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('embear/vim-localvimrc')
 call dein#add('Yggdroot/indentLine')
 call dein#add('airblade/vim-gitgutter')
+call dein#add('bronson/vim-trailing-whitespace')
+call dein#add('thinca/vim-zenspace')
+call dein#add('vim-scripts/AnsiEsc.vim')
 
 call dein#end()
 
@@ -290,4 +286,22 @@ let g:indentLine_color_term = 239
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airblade/vim-gitgutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" bronson/vim-trailing-whitespace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ExtraWhitespace ctermbg=8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" thinca/vim-zenspace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 全角スペースを視覚化
+let g:zenspace#default_mode = 'on'
+
+" 全角スペースの色
+highlight default ZenSpace ctermbg=23
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-scripts/AnsiEsc.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

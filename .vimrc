@@ -81,10 +81,10 @@ set smartindent
 " シフトオペレータで挿入するインデント幅
 set shiftwidth=2
 
-" TABキーのインデント幅
+" <tab>キーのインデント幅
 set tabstop=4
 
-" TABキーでスペースを挿入
+" <tab>キーでスペースを挿入
 set expandtab
 
 " クリップボードからのペーストを有効化
@@ -214,7 +214,7 @@ let g:neocomplete#enable_ignore_case = 1
 " 大文字が入力された場合に大文字・小文字を区別する
 let g:neocomplete#enable_smart_case = 1
 
-" 'Enter'で補完を確定
+" <enter>で補完を確定
 function! s:my_crinsert()
   return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
 endfunction
@@ -237,6 +237,11 @@ nnoremap <F3> :Unite<Space>file_mru<CR>
 " tomasr/molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+
+" 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
+set synmaxcol=128
+
+" 適用するカラースキーム
 colorscheme molokai
 
 " カラースキームのオーバーライド
@@ -247,7 +252,7 @@ hi Comment ctermfg=245
 " tComment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 'c': 選択範囲をコメントアウト (またはアンコメント)
+" <c>: 選択範囲をコメントアウト (またはアンコメント)
 let g:tcommentMapLeaderOp1 = 'c'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,7 +271,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 " 隠しファイルを表示
 let NERDTreeShowHidden = 1
 
-" 'F4': ファイルリストを開く
+" <F4>: ファイルリストを開く
 nnoremap <F4> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

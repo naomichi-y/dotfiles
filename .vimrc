@@ -57,6 +57,35 @@ set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 " PHPのショートタグをハイライトから除外
 let php_noShortTags = 1
 
+" <F2>:行番号表示の切り替え
+function Setnumber()
+  if &number
+    setlocal nonumber
+  else
+    setlocal number
+  endif
+endfunction
+nnoremap <silent> <F2> :call Setnumber()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airblade/vim-gitgutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" bronson/vim-trailing-whitespace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ExtraWhitespace ctermbg=8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" thinca/vim-zenspace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 全角スペースを視覚化
+let g:zenspace#default_mode = 'on'
+
+" 全角スペースの色
+highlight default ZenSpace ctermbg=23
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 検索
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,6 +317,9 @@ let g:localvimrc_sandbox=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " インデントの深さを表す色
 let g:indentLine_color_term = 239
+
+" <F1>: 無効化・有効化の切り替え
+nnoremap <F1> :IndentLinesToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airblade/vim-gitgutter

@@ -82,7 +82,7 @@ set smartindent
 set shiftwidth=2
 
 " TABキーのインデント幅
-set tabstop=4
+set tabstop=2
 
 " TABキーでスペースを挿入
 set expandtab

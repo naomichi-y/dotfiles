@@ -57,6 +57,35 @@ set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 " PHPのショートタグをハイライトから除外
 let php_noShortTags = 1
 
+" <F2>:行番号表示の切り替え
+function Setnumber()
+  if &number
+    setlocal nonumber
+  else
+    setlocal number
+  endif
+endfunction
+nnoremap <silent> <F2> :call Setnumber()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airblade/vim-gitgutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" bronson/vim-trailing-whitespace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ExtraWhitespace ctermbg=8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" thinca/vim-zenspace
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 全角スペースを視覚化
+let g:zenspace#default_mode = 'on'
+
+" 全角スペースの色
+highlight default ZenSpace ctermbg=23
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 検索
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -84,7 +113,7 @@ set shiftwidth=2
 " TABキーのインデント幅
 set tabstop=2
 
-" TABキーでスペースを挿入
+" <tab>キーでスペースを挿入
 set expandtab
 
 " クリップボードからのペーストを有効化
@@ -214,7 +243,7 @@ let g:neocomplete#enable_ignore_case = 1
 " 大文字が入力された場合に大文字・小文字を区別する
 let g:neocomplete#enable_smart_case = 1
 
-" 'Enter'で補完を確定
+" <enter>で補完を確定
 function! s:my_crinsert()
   return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
 endfunction
@@ -237,6 +266,11 @@ nnoremap <F3> :Unite<Space>file_mru<CR>
 " tomasr/molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+
+" 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
+set synmaxcol=128
+
+" 適用するカラースキーム
 colorscheme molokai
 
 " カラースキームのオーバーライド
@@ -247,7 +281,7 @@ hi Comment ctermfg=245
 " tComment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 'c': 選択範囲をコメントアウト (またはアンコメント)
+" <c>: 選択範囲をコメントアウト (またはアンコメント)
 let g:tcommentMapLeaderOp1 = 'c'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,7 +300,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 " 隠しファイルを表示
 let NERDTreeShowHidden = 1
 
-" 'F4': ファイルリストを開く
+" <F4>: ファイルリストを開く
 nnoremap <F4> :NERDTreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -283,6 +317,9 @@ let g:localvimrc_sandbox=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " インデントの深さを表す色
 let g:indentLine_color_term = 239
+
+" <F1>: 無効化・有効化の切り替え
+nnoremap <F1> :IndentLinesToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airblade/vim-gitgutter

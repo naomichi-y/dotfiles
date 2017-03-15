@@ -1,6 +1,9 @@
 #!/bin/bash
 
-BASE_DIR=$(cd $(dirname $0);pwd)
+REPO_ROOT_PATH=$(cd $(dirname $0);pwd)
+
+# Setup .bash_profile
+ln -s $REPO_ROOT_PATH/.bash_profile ~/.bash_profile
 
 # Setup vim
 if [ -d ~/.vim ]; then
@@ -8,25 +11,25 @@ if [ -d ~/.vim ]; then
 #  exit 1
 fi
 
-ln -s $BASE_DIR/.vim ~/.vim
+ln -s $REPO_ROOT_PATH/.vim ~/.vim
 
 if [ -f ~/.vimrc ]; then
   echo '[Error] .vimrc file exists.'
 #  exit 1
 fi
 
-ln -s $BASE_DIR/.vimrc ~/.vimrc
+ln -s $REPO_ROOT_PATH/.vimrc ~/.vimrc
 
-if [ -d $BASE_DIR/.vim/dein/repos/github.com/Shougo/dein.vim ]; then
-  rm -Rf $BASE_DIR/.vim/dein/repos/github.com/Shougo/dein.vim
+if [ -d $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim ]; then
+  rm -Rf $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim
 fi
 
-git clone https://github.com/Shougo/dein.vim.git $BASE_DIR/.vim/dein/repos/github.com/Shougo/dein.vim
+git clone https://github.com/Shougo/dein.vim.git $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim
 
 # Setup git
-ln -s $BASE_DIR/.gitconfig ~/.gitconfig
+ln -s $REPO_ROOT_PATH/.gitconfig ~/.gitconfig
 
 # Setup Zsh
-#ln -s $BASE_DIR/.zshrc ~/.zshrc
+#ln -s $REPO_ROOT_PATH/.zshrc ~/.zshrc
 
 echo 'Install success.'

@@ -273,6 +273,9 @@ set synmaxcol=128
 " 適用するカラースキーム
 colorscheme molokai
 
+" ハイライト対象ファイルの追加
+autocmd BufNewFile,BufRead *.thor set syntax=ruby
+
 " カラースキームのオーバーライド
 hi Delimiter ctermfg=245
 hi Comment ctermfg=245

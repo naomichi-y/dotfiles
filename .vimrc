@@ -268,13 +268,14 @@ nnoremap <F3> :Unite<Space>file_mru<CR>
 syntax on
 
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
-set synmaxcol=128
+set synmaxcol=160
 
 " 適用するカラースキーム
 colorscheme molokai
 
 " ハイライト対象ファイルの追加
 autocmd BufNewFile,BufRead *.thor set syntax=ruby
+autocmd BufNewFile,BufRead *.eye set syntax=ruby
 
 " カラースキームのオーバーライド
 hi Delimiter ctermfg=245

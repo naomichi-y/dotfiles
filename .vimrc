@@ -220,6 +220,7 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('thinca/vim-zenspace')
 call dein#add('vim-scripts/AnsiEsc.vim')
+call dein#add('elzr/vim-json')
 
 call dein#end()
 
@@ -269,6 +270,9 @@ syntax on
 
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
 set synmaxcol=160
+
+" JSONのダブルクォートが非表示になる機能を無効化
+let g:vim_json_syntax_conceal = 0
 
 " 適用するカラースキーム
 colorscheme molokai

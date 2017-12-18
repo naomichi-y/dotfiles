@@ -1,35 +1,12 @@
 #!/bin/bash
+set -eu
 
-REPO_ROOT_PATH=$(cd $(dirname $0);pwd)
+. ./lib/functions.sh
 
-# Setup .bash_profile
-ln -s $REPO_ROOT_PATH/.bash_profile ~/.bash_profile
+REPO_PATH=$(cd $(dirname $0);pwd)
 
-# Setup vim
-if [ -d ~/.vim ]; then
-  echo '[Error] .vim directory exists.'
-#  exit 1
-fi
+setup_bash_profile
+setup_vimrc
+setup_gitconfig
 
-ln -s $REPO_ROOT_PATH/.vim ~/.vim
-
-if [ -f ~/.vimrc ]; then
-  echo '[Error] .vimrc file exists.'
-#  exit 1
-fi
-
-ln -s $REPO_ROOT_PATH/.vimrc ~/.vimrc
-
-if [ -d $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim ]; then
-  rm -Rf $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim
-fi
-
-git clone https://github.com/Shougo/dein.vim.git $REPO_ROOT_PATH/.vim/dein/repos/github.com/Shougo/dein.vim
-
-# Setup git
-ln -s $REPO_ROOT_PATH/.gitconfig ~/.gitconfig
-
-# Setup Zsh
-#ln -s $REPO_ROOT_PATH/.zshrc ~/.zshrc
-
-echo 'Install success.'
+echo 'Installation is completed.'

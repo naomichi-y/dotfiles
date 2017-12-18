@@ -1,4 +1,4 @@
-PS1='\u@\W\$ '
+PS1='\W\$ '
 
 eval "$(nodenv init -)"
 eval "$(rbenv init -)"

@@ -138,7 +138,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " ファイル保存時に行末の空白を削除
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " ファイル保存時にタブをスペースに変換
 "autocmd BufWritePre * :%s/\t/  /ge

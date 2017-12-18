@@ -2,7 +2,7 @@
 set -eu
 
 confirm_delete() {
-  if [ -e $1 ]; then
+  if [ -e $1 -o -L $1 ]; then
     echo "$1 is exists. do you want to overwrite? (y/n)"
     read answer
 
@@ -11,9 +11,6 @@ confirm_delete() {
     else
       exit 1;
     fi
-  else
-    echo 3
-    echo $1
   fi
 }
 
@@ -45,3 +42,25 @@ setup_gitconfig() {
   confirm_delete ~/.gitconfig
   ln -s $REPO_PATH/.gitconfig ~/.gitconfig
 }
+
+setup_tmux_conf() {
+  echo 'Setup ~/tmux.conf'
+
+  if [ `which tmux` ]; then
+    confirm_delete ~/.tmux.conf
+    ln -s $REPO_PATH/.tmux.conf ~/.tmux.conf
+
+    confirm_delete ~/.tmux
+    ln -s $REPO_PATH/.tmux ~/.tmux
+
+    if [ -d ~/.tmux/plugins/tpm ]; then
+      rm -Rf ~/.tmux/plugins/tpm
+    fi
+
+    git clone https://github.com/tmux-plugins/tpm $REPO_PATH/.tmux/plugins/tpm
+    tmux source ~/.tmux.conf
+  else
+    echo 'tmux command is not found.'
+  fi
+}
+

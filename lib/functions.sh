@@ -59,6 +59,7 @@ setup_tmux_conf() {
 
     git clone https://github.com/tmux-plugins/tpm $REPO_PATH/.tmux/plugins/tpm
     tmux source ~/.tmux.conf
+    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
   else
     echo 'tmux command is not found.'
   fi

@@ -1,0 +1,8 @@
+pane	0	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	18	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	18	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	vim	:/usr/local/bin/vim .bash_profile
+pane	2	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+window	0	0	1	:*	cf3d,130x49,0,0,0
+window	18	0	1	:*	6b07,130x49,0,0{34x49,0,0,1,95x49,35,0,2}
+window	2	0	1	:*	cf40,130x49,0,0,3
+state	18	2

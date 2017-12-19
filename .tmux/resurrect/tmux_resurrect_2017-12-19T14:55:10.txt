@@ -1,0 +1,45 @@
+pane	0	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082/Projects/dotfiles/.tmux/plugins	1	bash	:
+pane	1	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082/Projects/dotfiles	0	bash	:
+pane	1	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082/Projects/dotfiles	1	bash	:
+pane	10	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	10	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	11	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	12	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	13	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	14	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	15	0	:vim	1	:*	1	:/Users/naomichi_yamakita_pn082	1	vim	:/usr/local/bin/vim .tmux.conf
+pane	16	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	16	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	17	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	2	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	2	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	3	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	4	0	:vim	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	5	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	5	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	6	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	7	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	7	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	8	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
+pane	8	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
+pane	9	0	:vim	1	:*	1	:/Users/naomichi_yamakita_pn082	1	vim	:/usr/local/bin/vim /Users/naomichi_yamakita_pn082/.tmux.conf
+pane	9	0	:vim	1	:*	2	:/Users/naomichi_yamakita_pn082	0	bash	:
+window	0	0	1	:*	cf3e,130x49,0,0,1
+window	1	0	1	:*	128c,130x49,0,0{95x49,0,0,2,34x49,96,0,3}
+window	10	0	1	:*	6249,130x49,0,0{35x49,0,0,17,94x49,36,0,18}
+window	11	0	1	:*	67d8,130x49,0,0,19
+window	12	0	1	:*	e7cf,130x49,0,0,20
+window	13	0	1	:*	e7d0,130x49,0,0,21
+window	14	0	1	:*	e7d1,130x49,0,0,22
+window	15	0	1	:*	e7d2,130x49,0,0,23
+window	16	0	1	:*	28eb,130x49,0,0{65x49,0,0,24,64x49,66,0,25}
+window	17	0	1	:*	e7d5,130x49,0,0,26
+window	2	0	1	:*	f9e4,130x49,0,0{64x49,0,0,4,65x49,65,0,5}
+window	3	0	1	:*	cf43,130x49,0,0,6
+window	4	0	1	:*	cf44,130x49,0,0,7
+window	5	0	1	:*	03d7,130x49,0,0{65x49,0,0,8,64x49,66,0,9}
+window	6	0	1	:*	67cf,130x49,0,0,10
+window	7	0	1	:*	68e2,130x49,0,0{65x49,0,0,11,64x49,66,0,12}
+window	8	0	1	:*	68e7,130x49,0,0{65x49,0,0,13,64x49,66,0,14}
+window	9	0	1	:*	68ec,130x49,0,0{65x49,0,0,15,64x49,66,0,16}
+state	15	

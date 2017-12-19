@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AboutToPasteTabsWithCancel</key>
+	<true/>
+	<key>AboutToPasteTabsWithCancel_selection</key>
+	<integer>0</integer>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
 	<key>AllowClipboardAccess</key>
@@ -31,7 +35,7 @@
 	<key>CopySelection</key>
 	<true/>
 	<key>Default Bookmark Guid</key>
-	<string>617704A9-1EE9-4D9D-BDF3-6FA16EDEA7A2</string>
+	<string>32478C71-840D-4D1F-816E-D8E41D7343B5</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -61,7 +65,7 @@
 	<key>HighlightTabLabels</key>
 	<true/>
 	<key>HotKeyBookmark</key>
-	<string>617704A9-1EE9-4D9D-BDF3-6FA16EDEA7A2</string>
+	<string>32478C71-840D-4D1F-816E-D8E41D7343B5</string>
 	<key>HotKeyTogglesWindow</key>
 	<false/>
 	<key>Hotkey</key>
@@ -87,9 +91,13 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSColorPanelMode</key>
-	<string>6</string>
+	<string>1</string>
+	<key>NSColorPickerSlidersDefaults</key>
+	<string>1</string>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 1</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
+	<string>~/Projects/dotfiles/iTerm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -129,27 +137,31 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>427 412 228 325 0 0 1680 1027 </string>
+	<string>170 -741 231 329 -140 -1080 1920 1057 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>477 481 445 103 0 0 1680 1027 </string>
+	<string>750 -943 445 77 -140 -1080 1920 1057 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>572 566 606 456 0 0 1680 1027 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>532 476 620 392 0 0 1680 1027 </string>
+	<string>134 545 606 456 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>677 -384 400 129 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 139 606 469 0 0 1680 1027 </string>
+	<string>14 -941 606 469 -255 -1080 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>258 115 796 473 0 0 1680 1027 </string>
+	<string>-75 -692 796 473 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>5 60 920 877 0 0 1680 1027 </string>
+	<string>-19 -983 790 777 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>9 110 920 877 0 0 1680 1027 </string>
+	<string>-65 -979 790 777 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>249 82 920 877 0 0 1680 1027 </string>
+	<string>-17 -1028 790 777 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>32 82 920 877 0 0 1680 1027 </string>
+	<string>169 -961 790 777 -83 -1080 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>275 32 920 877 0 0 1680 1027 </string>
+	<string>-37 -1054 790 777 -255 -1080 1920 1057 </string>
+	<key>NSWindow Frame iTerm Window 5</key>
+	<string>112 -973 790 777 -255 -1080 1920 1057 </string>
+	<key>NSWindow Frame iTerm Window 6</key>
+	<string>33 227 730 748 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -170,12 +182,16 @@
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.40481346845626831</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.45732018351554871</real>
 				<key>Red Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.92228567600250244</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
@@ -251,12 +267,16 @@
 			</dict>
 			<key>Ansi 4 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.81464886665344238</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.54412108659744263</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.090693108737468719</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -321,7 +341,7 @@
 			<key>Background Image Location</key>
 			<string></string>
 			<key>Blend</key>
-			<real>0.30000001192092896</real>
+			<real>0.26220078315490336</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -329,7 +349,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>15</real>
+			<real>26.562439903846155</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -383,19 +403,23 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.02991100400686264</real>
+				<real>0.12365773320198058</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.71185898780822754</real>
+				<real>0.889068603515625</real>
 				<key>Red Component</key>
-				<real>0.1389523446559906</real>
+				<real>0.114532470703125</real>
 			</dict>
 			<key>Guid</key>
-			<string>617704A9-1EE9-4D9D-BDF3-6FA16EDEA7A2</string>
+			<string>32478C71-840D-4D1F-816E-D8E41D7343B5</string>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>1</real>
+			<real>0.9564841396837348</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -703,9 +727,9 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>Monaco 10</string>
 			<key>Only The Default BG Color Uses Transparency</key>
-			<true/>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -717,7 +741,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>3000</integer>
+			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
 			<key>Scrollback in Alternate Screen</key>
@@ -857,11 +881,11 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.083667714497041412</real>
+			<real>0.11711815828402364</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
-			<false/>
+			<true/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -871,13 +895,13 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>1.0089890813253013</real>
 			<key>Visual Bell</key>
 			<false/>
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/naomichi</string>
+			<string>/Users/naomichi_yamakita_pn082</string>
 		</dict>
 	</array>
 	<key>NoSyncConfirmBeta</key>
@@ -890,22 +914,24 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
 	<integer>0</integer>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>A7F7A067-2E7A-4A37-9E16-6D02B60EB9D8</string>
+	<string>9CE360CC-AA97-4D7E-ADD0-EC1CCAC4B58C</string>
 	<key>NoSyncLastTipTime</key>
-	<real>487399179.83643299</real>
+	<real>487658743.04965597</real>
 	<key>NoSyncNeverAskAboutSettingAlternateMouseScroll</key>
 	<true/>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
-	<key>NoSyncSuppressAnnyoingBellOffer</key>
+	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>486572106.46717697</real>
+	<real>477909849.05841899</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>482458819.16542202</real>
+	<real>477563199.46406901</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>486202732.57653499</real>
+	<real>486957052.965258</real>
 	<key>NoSyncTipsDisabled</key>
 	<true/>
 	<key>NoSyncTipsToNotShow</key>
@@ -964,7 +990,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/naomichi/Projects/dotfiles/iTerm2</string>
+	<string>/Users/naomichi_yamakita_pn082/Projects/dotfiles/iTerm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -982,15 +1008,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=91</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=99</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-16T09:52:13Z</date>
+	<date>2017-12-19T05:15:38Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
-	<key>Selection Respects Soft Boundaries</key>
-	<true/>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowPaneTitles</key>
@@ -1009,10 +1033,6 @@
 	<false/>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
-	<key>ToolbeltTools</key>
-	<array>
-		<string>Profiles</string>
-	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>URLHandlersByGuid</key>
@@ -1035,9 +1055,15 @@
 	<string>/-+\~_.</string>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.1.5.beta.2</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>5</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>

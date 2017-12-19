@@ -1,4 +1,0 @@
-pane	18	0	:bash	1	:*	1	:/Users/naomichi_yamakita_pn082	0	bash	:
-pane	18	0	:bash	1	:*	2	:/Users/naomichi_yamakita_pn082	1	bash	:
-window	18	0	1	:*	ddd1,130x49,0,0{34x49,0,0,14,95x49,35,0,15}
-state	18	

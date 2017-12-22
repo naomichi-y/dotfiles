@@ -269,7 +269,7 @@ nnoremap <F3> :Unite<Space>file_mru<CR>
 syntax on
 
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
-set synmaxcol=160
+set synmaxcol=256
 
 " JSONのダブルクォートが非表示になる機能を無効化
 let g:vim_json_syntax_conceal = 0

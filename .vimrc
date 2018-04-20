@@ -221,6 +221,7 @@ call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('thinca/vim-zenspace')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('elzr/vim-json')
+call dein#add('Lokaltog/vim-powerline')
 
 call dein#end()
 

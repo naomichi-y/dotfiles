@@ -211,8 +211,8 @@ call dein#add('Shougo/neocomplete.vim', { 'on_i': 1 })
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/neomru.vim')
 call dein#add('tomasr/molokai')
-call dein#add('tComment')
-call dein#add('Syntastic')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('vim-syntastic/syntastic')
 call dein#add('scrooloose/nerdtree')
 call dein#add('embear/vim-localvimrc')
 call dein#add('Yggdroot/indentLine')
@@ -266,7 +266,7 @@ nnoremap <F3> :Unite<Space>file_mru<CR>
 syntax on
 
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
-set synmaxcol=160
+set synmaxcol=256
 
 " JSONのダブルクォートが非表示になる機能を無効化
 let g:vim_json_syntax_conceal = 0
@@ -287,7 +287,7 @@ hi Comment ctermfg=245
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " <c>: 選択範囲をコメントアウト (またはアンコメント)
-let g:tcommentMapLeaderOp1 = 'c'
+let g:tcomment_opleader1 = 'c'
 
 autocmd FileType tf setlocal commentstring=#\ %s
 autocmd FileType Dockerfile setlocal commentstring=#\ %s

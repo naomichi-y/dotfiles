@@ -221,6 +221,7 @@ call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('thinca/vim-zenspace')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('elzr/vim-json')
+call dein#add('hashivim/vim-terraform')
 
 call dein#end()
 
@@ -249,10 +250,6 @@ function! s:my_crinsert()
   return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
 endfunction
 inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Shougo/unite
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shougo/neomru.vim
@@ -292,6 +289,9 @@ hi Comment ctermfg=245
 " <c>: 選択範囲をコメントアウト (またはアンコメント)
 let g:tcommentMapLeaderOp1 = 'c'
 
+autocmd FileType tf setlocal commentstring=#\ %s
+autocmd FileType Dockerfile setlocal commentstring=#\ %s
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -330,10 +330,6 @@ let g:indentLine_color_term = 239
 nnoremap <F1> :IndentLinesToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airblade/vim-gitgutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bronson/vim-trailing-whitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ExtraWhitespace ctermbg=8
@@ -348,5 +344,7 @@ let g:zenspace#default_mode = 'on'
 highlight default ZenSpace ctermbg=23
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-scripts/AnsiEsc.vim
+" hashivim/vim-terraform
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Terraformが必要
+let g:terraform_fmt_on_save = 1

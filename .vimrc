@@ -290,8 +290,7 @@ hi Comment ctermfg=245
 " <c>: 選択範囲をコメントアウト (またはアンコメント)
 let g:tcomment_opleader1 = 'c'
 
-autocmd FileType tf setlocal commentstring=#\ %s
-autocmd FileType Dockerfile setlocal commentstring=#\ %s
+set commentstring=#\ %s
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic

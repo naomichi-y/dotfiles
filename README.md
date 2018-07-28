@@ -10,7 +10,5 @@ dotfiles
 ## Setup
 
 ```
-git clone https://github.com/naomichi-y/dotfiles.git
-cd dotfiles
 ./installer
 ```

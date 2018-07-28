@@ -5,9 +5,9 @@ set -eu
 
 REPO_PATH=$(cd $(dirname $0);pwd)
 
-setup_bash_profile
+setup_shell
 setup_vimrc
 setup_gitconfig
-setup_tmux_conf
+# setup_tmux_conf
 
 echo 'Installation is completed.'

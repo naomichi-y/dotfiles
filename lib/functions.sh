@@ -14,12 +14,12 @@ confirm_delete() {
   fi
 }
 
-setup_bash_profile() {
-  echo 'Setup ~/.bash_profile'
-  confirm_delete ~/.bash_profile
+setup_shell_profile() {
+  echo 'Setup ~/.zshrc'
+  confirm_delete ~/.zshrc
 
-  ln -s $REPO_PATH/.bash_profile ~/.bash_profile
-  echo 'Create ~/.bash_profile'
+  ln -s $REPO_PATH/.zshrc ~/zshrc
+  echo 'Create ~/.zshrc'
 }
 
 setup_vimrc() {

@@ -57,7 +57,7 @@ set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 " PHPのショートタグをハイライトから除外
 let php_noShortTags = 1
 
-" <F2>:行番号表示の切り替え
+" <Ctrl+n>:行番号表示の切り替え
 function Setnumber()
   if &number
     setlocal nonumber
@@ -65,7 +65,7 @@ function Setnumber()
     setlocal number
   endif
 endfunction
-nnoremap <silent> <F2> :call Setnumber()<CR>
+nnoremap <silent> <C-n> :call Setnumber()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airblade/vim-gitgutter
@@ -326,8 +326,11 @@ let g:localvimrc_sandbox=0
 " インデントの深さを表す色
 let g:indentLine_color_term = 239
 
-" <F1>: 無効化・有効化の切り替え
-nnoremap <F1> :IndentLinesToggle<CR>
+" <Ctrl-i>: 無効化・有効化の切り替え
+nnoremap <C-i> :IndentLinesToggle<CR>
+
+" 高速化
+let g:indentLine_faster = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bronson/vim-trailing-whitespace

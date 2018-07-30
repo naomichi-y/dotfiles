@@ -19,6 +19,7 @@ setopt share_history
 setopt correct
 autoload -Uz compinit
 compinit -u
+zstyle ':completion:*:default' menu select=1
 
 if [ -e /usr/local/share/zsh-completions ]; then
   fpath=(/usr/local/share/zsh-completions $fpath)

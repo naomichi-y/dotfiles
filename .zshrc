@@ -2,7 +2,8 @@
 # ZSH
 #############################################################
 
-PROMPT='$ '
+PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+%# "
 
 setopt no_beep
 
@@ -30,8 +31,7 @@ setopt list_packed
 zstyle ':completion:*' list-colors ''
 
 # エイリアス
-alias ls='ls -aF'
-alias ll='ls -l'
+alias ll='ls -la'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'

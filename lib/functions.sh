@@ -14,7 +14,7 @@ confirm_delete() {
   fi
 }
 
-setup_shell_profile() {
+setup_shell() {
   echo 'Setup ~/.zshrc'
   confirm_delete ~/.zshrc
 

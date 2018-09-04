@@ -52,3 +52,11 @@ fi
 export LANG=ja_JP.UTF-8
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
+
+#############################################################
+# Load local setting
+#############################################################
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+

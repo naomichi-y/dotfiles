@@ -39,10 +39,6 @@ alias cat='cat -n'
 alias less='less -NM'
 alias c='clear'
 
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
-fi
-
 #############################################################
 # Homebrew
 #############################################################

@@ -14,11 +14,11 @@ confirm_delete() {
   fi
 }
 
-setup_shell_profile() {
+setup_shell() {
   echo 'Setup ~/.zshrc'
   confirm_delete ~/.zshrc
 
-  ln -s $REPO_PATH/.zshrc ~/zshrc
+  ln -s $REPO_PATH/.zshrc ~/.zshrc
   echo 'Create ~/.zshrc'
 }
 

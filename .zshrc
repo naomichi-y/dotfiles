@@ -30,7 +30,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 setopt list_packed
 zstyle ':completion:*' list-colors ''
 
-# エイリアス
 alias ll='ls -la'
 alias rm='rm -i'
 alias cp='cp -i'
@@ -38,6 +37,11 @@ alias mv='mv -i'
 alias vi='vim'
 alias cat='cat -n'
 alias less='less -NM'
+alias c='clear'
+
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
 
 #############################################################
 # Homebrew

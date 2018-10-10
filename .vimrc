@@ -18,6 +18,9 @@ if has("autocmd")
   \ endif
 endif
 
+" クリックボードの有効化
+set clipboard+=unnamed
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " エンコーディング
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,53 +149,51 @@ autocmd BufWritePre * :%s/\s\+$//e
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 操作
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " Anywhere SID.
-" function! s:SID_PREFIX()
-"   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-" endfunction
-"
-" " Set tabline.
-" function! s:my_tabline()  "{{{
-"   let s = ''
-"   for i in range(1, tabpagenr('$'))
-"     let bufnrs = tabpagebuflist(i)
-"     let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-"     let no = i  " display 0-origin tabpagenr.
-"     let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-"     let title = fnamemodify(bufname(bufnr), ':t')
-"     let title = '[' . title . ']'
-"     let s .= '%'.i.'T'
-"     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-"     let s .= no . ':' . title
-"     let s .= mod
-"     let s .= '%#TabLineFill# '
-"   endfor
-"   let s .= '%#TabLineFill#%T%=%#TabLine#'
-"   return s
-" endfunction "}}}
-" let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-" set showtabline=2 " 常にタブラインを表示
-"
-" " The prefix key.
-" nnoremap    [Tag]   <Nop>
-" nmap    t [Tag]
-" " Tab jump
-" for n in range(1, 9)
-"   " 'T1'で1番左のタブ、'T2'で1番左から2番目のタブにジャンプ
-"   execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-" endfor
-"
-" " 'TC': 新しいタブを一番右に作る
-" map <silent> [Tag]c :tablast <bar> tabnew<CR>
-"
-" " 'TX': タブを閉じる
-" map <silent> [Tag]x :tabclose<CR>
-"
-" " 'TN': 次のタブ
-" map <silent> [Tag]n :tabnext<CR>
-"
-" " 'TP': 前のタブ
-" map <silent> [Tag]p :tabprevious<CR>
+
+" Anywhere SID.
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+" Set tabline.
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " プラグインマネージャ
@@ -214,6 +215,7 @@ call dein#add('tomasr/molokai')
 call dein#add('tomtom/tcomment_vim')
 call dein#add('vim-syntastic/syntastic')
 call dein#add('scrooloose/nerdtree')
+call dein#add('jistr/vim-nerdtree-tabs')
 call dein#add('embear/vim-localvimrc')
 call dein#add('Yggdroot/indentLine')
 " call dein#add('airblade/vim-gitgutter')
@@ -308,8 +310,8 @@ let g:syntastic_mode_map = { 'mode': 'active',
 " 隠しファイルを表示
 let NERDTreeShowHidden = 1
 
-" <F4>: ファイルリストを開く
-nnoremap <F4> :NERDTreeToggle<CR>
+" <Ctrl-l>: ファイルリストを開く
+nnoremap <C-l> :NERDTreeTabsToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " embear/vim-localvimrc
@@ -351,3 +353,4 @@ highlight default ZenSpace ctermbg=23
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terraformが必要
 let g:terraform_fmt_on_save = 1
+

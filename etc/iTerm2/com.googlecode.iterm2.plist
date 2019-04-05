@@ -271,9 +271,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2 532 796 486 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>52 25 850 927 0 0 1680 1027 </string>
+	<string>31 72 850 927 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>113 91 850 927 0 0 1680 1027 </string>
+	<string>81 41 850 927 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>9 7 850 927 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1508,12 +1508,16 @@
 			</dict>
 			<key>Selection Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.1989070326089859</real>
+				<real>0.617889404296875</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.0037887054495513439</real>
+				<real>0.23739175060927664</real>
 				<key>Red Component</key>
-				<real>0.10134787112474442</real>
+				<real>0.089936020318418741</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>

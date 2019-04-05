@@ -2,7 +2,7 @@
 # ZSH
 #############################################################
 
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+PROMPT="%F{038}[%n@%m]%f %~
 %# "
 
 setopt no_beep
@@ -52,6 +52,7 @@ fi
 export LANG=ja_JP.UTF-8
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
+export PATH=$PATH:~/.bin
 
 #############################################################
 # Load local setting

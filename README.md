@@ -1,4 +1,4 @@
-dotfiles
+# dotfiles
 --------
 
 ## Required tools
@@ -7,8 +7,17 @@ dotfiles
 * vim
 * tmux (Optional)
 
-## Setup
+## Installation
+
+### Base
 
 ```
 ./installer
 ```
+
+### iTerm2
+
+1. Open `Preferences` - `General` tab from menu bar.
+2. Set `etc/iTerm2/com.googlecode.iterm2.plist` to `Load preferences from a custom folder or URL`.
+3. Open `Profiles` - `Colors` tab.
+4. Specify `Color presets` - `Import` and set `etc/iTerm2/iceberg.itermcolors`.

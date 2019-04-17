@@ -280,6 +280,7 @@ colorscheme molokai
 autocmd BufNewFile,BufRead *.thor set syntax=ruby
 autocmd BufNewFile,BufRead *.eye set syntax=ruby
 autocmd BufNewFile,BufRead *.sh.tpl set syntax=sh
+autocmd BufNewFile,BufRead *.vue set syntax=html
 
 " カラースキームのオーバーライド
 hi Delimiter ctermfg=245

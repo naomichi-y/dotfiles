@@ -278,7 +278,6 @@ colorscheme molokai
 
 " ハイライト対象ファイルの追加
 autocmd BufNewFile,BufRead *.thor set syntax=ruby
-autocmd BufNewFile,BufRead *.eye set syntax=ruby
 autocmd BufNewFile,BufRead *.sh.tpl set syntax=sh
 autocmd BufNewFile,BufRead *.vue set syntax=html
 autocmd BufNewFile,BufRead *.ts set syntax=javascript

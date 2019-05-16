@@ -224,6 +224,7 @@ call dein#add('thinca/vim-zenspace')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('elzr/vim-json')
 call dein#add('hashivim/vim-terraform')
+call dein#add('itchyny/lightline.vim')
 
 call dein#end()
 
@@ -354,4 +355,3 @@ highlight default ZenSpace ctermbg=23
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terraformが必要
 let g:terraform_fmt_on_save = 1
-

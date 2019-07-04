@@ -271,6 +271,9 @@ syntax on
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
 set synmaxcol=256
 
+" シンタックス範囲
+autocmd FileType markdown syntax sync minlines=500 maxlines=1000
+
 " JSONのダブルクォートが非表示になる機能を無効化
 let g:vim_json_syntax_conceal = 0
 

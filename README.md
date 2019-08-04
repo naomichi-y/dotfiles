@@ -12,7 +12,7 @@
 ### Base
 
 ```
-./installer
+$ ./installer
 ```
 
 ### iTerm2

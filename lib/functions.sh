@@ -14,12 +14,24 @@ confirm_delete() {
   fi
 }
 
+setup_init() {
+  echo 'Setup Homebrew'
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  echo 'Setup Ricty font'
+  brew tap sanemat/font
+  brew install ricty
+}
+
 setup_shell() {
   echo 'Setup ~/.zshrc'
   confirm_delete ~/.zshrc
 
   ln -s $REPO_PATH/.zshrc ~/.zshrc
   echo 'Create ~/.zshrc'
+
+  echo 'Change shell'
+  chsh -s /bin/zsh
 }
 
 setup_vimrc() {

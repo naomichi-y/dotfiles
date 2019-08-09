@@ -5,6 +5,7 @@ set -eu
 
 REPO_PATH=$(cd $(dirname $0);pwd)
 
+setup_init
 setup_shell
 setup_vimrc
 setup_gitconfig

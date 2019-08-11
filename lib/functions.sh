@@ -18,6 +18,10 @@ setup_init() {
   echo 'Setup Homebrew'
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+  echo 'Setup vim with lua'
+  brew install lua
+  brew reinstall vim
+
   echo 'Setup Ricty font'
   brew tap sanemat/font
   brew install ricty

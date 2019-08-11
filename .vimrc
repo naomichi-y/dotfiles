@@ -223,7 +223,7 @@ call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('thinca/vim-zenspace')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('elzr/vim-json')
-call dein#add('hashivim/vim-terraform')
+" call dein#add('hashivim/vim-terraform')
 call dein#add('itchyny/lightline.vim')
 
 call dein#end()

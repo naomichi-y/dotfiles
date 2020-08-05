@@ -38,6 +38,7 @@ alias vi='vim'
 alias cat='cat -n'
 alias less='less -NM'
 alias c='clear'
+alias aws='docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli'
 
 #############################################################
 # Homebrew

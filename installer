@@ -1,13 +1,89 @@
 #!/bin/bash
 set -eu
 
-. ./lib/functions.sh
+confirm_delete() {
+  if [ -e $1 -o -L $1 ]; then
+    echo "$1 is exists. do you want to overwrite? (y/n)"
+    read answer
 
-REPO_PATH=$(cd $(dirname $0);pwd)
+    if [ $answer == 'y' ]; then
+      rm $1
+    else
+      exit 1;
+    fi
+  fi
+}
+
+setup_init() {
+  echo 'Install Homebrew'
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  echo 'Install Ricty font'
+  brew tap sanemat/font
+  brew install ricty
+}
+
+setup_shell() {
+  echo 'Setup ~/.zshrc'
+  confirm_delete ~/.zshrc
+
+  ln -s ${BASE_PATH}/.zshrc ~/.zshrc
+  echo 'Create ~/.zshrc'
+
+  echo 'Change shell'
+  chsh -s /bin/zsh
+}
+
+setup_neovim() {
+  echo 'Install neovim'
+  brew install neovim
+
+  echo 'Install required libraries'
+  pip3 install -U msgpack-python
+
+  mkdir -p ~/.config
+  confirm_delete ~/.config/nvim
+  ln -s ${BASE_PATH}/.config/nvim ~/.config
+
+  echo 'Install deain.vim'
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+  sh ./installer.sh ~/.cache/dein
+  rm ./installer.sh
+}
+
+setup_gitconfig() {
+  echo 'Setup ~/.gitconfig'
+  confirm_delete ~/.gitconfig
+  ln -s ${BASE_PATH}/.gitconfig ~/.gitconfig
+}
+
+setup_tmux_conf() {
+  echo 'Setup ~/tmux.conf'
+
+  if [ `which tmux` ]; then
+    confirm_delete ~/.tmux.conf
+    ln -s ${BASE_PATH}/.tmux.conf ~/.tmux.conf
+
+    confirm_delete ~/.tmux
+    ln -s ${BASE_PATH}/.tmux ~/.tmux
+
+    if [ -d ~/.tmux/plugins/tpm ]; then
+      rm -Rf ~/.tmux/plugins/tpm
+    fi
+
+    git clone https://github.com/tmux-plugins/tpm ${BASE_PATH}/.tmux/plugins/tpm
+    tmux source ~/.tmux.conf
+    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+  else
+    echo 'tmux command is not found.'
+  fi
+}
+
+readonly BASE_PATH=$(cd $(dirname $0);pwd)
 
 setup_init
 setup_shell
-setup_vimrc
+setup_neovim
 setup_gitconfig
 # setup_tmux_conf
 

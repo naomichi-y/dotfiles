@@ -1,0 +1,93 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add='''
+  " 最近使ったファイルの一覧
+  noremap <C-h> :Denite file_mru<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+hook_add='''
+  let g:neomru#time_format = "(%Y/%m/%d %H:%M:%S) "
+'''
+
+[[plugins]]
+repo = 'hashivim/vim-terraform'
+
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+hook_add='''
+  let g:syntastic_enable_signs = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_mode_map = { 'mode': 'active',
+    \ 'active_filetypes': ['php', 'ruby', 'javascript', 'json'],
+    \ 'passive_filetypes': []
+    \ }
+'''
+
+[[plugins]]
+repo = 'embear/vim-localvimrc'
+hook_add='''
+  " ローカル.vimrcを自動で読み込む
+  let g:localvimrc_persistent=2
+
+  " ローカル.vimrcを有効化
+  let g:localvimrc_sandbox=0
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add='''
+  " インデントの深さを表す色
+  let g:indentLine_color_term = 239
+
+  " <Ctrl-i>: 無効化・有効化の切り替え
+  nnoremap <C-i> :IndentLinesToggle<CR>
+
+  " 高速化
+  let g:indentLine_faster = 1
+'''
+
+# [[plugins]]
+# repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+hook_add='''
+  " ファイル保存時に無駄なスペースを削除
+  autocmd BufWritePre * :FixWhitespace
+'''
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+on_event = 'InsertEnter'
+hook_add='''
+  " <c>: 選択範囲をコメントアウト (またはアンコメント)
+  let g:tcomment_opleader1 = 'c'
+'''
+
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add='''
+  " JSONのダブルクォートが非表示になる機能を無効化
+  let g:vim_json_syntax_conceal = 0
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+hook_add='''
+  " コードブロックのバッククォートを表示する
+  let g:vim_markdown_conceal_code_blocks = 0
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'

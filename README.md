@@ -4,7 +4,6 @@
 ## Required tools
 
 * git
-* vim
 * tmux (Optional)
 
 ## Installation

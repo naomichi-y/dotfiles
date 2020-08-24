@@ -18,6 +18,9 @@ setup_init() {
   echo 'Install Homebrew'
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+  echo 'Install required tools'
+  brew install telnet
+
   echo 'Install Ricty font'
   brew tap sanemat/font
   brew install ricty

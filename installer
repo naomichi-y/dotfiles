@@ -52,6 +52,10 @@ setup_neovim() {
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
   sh ./installer.sh ~/.cache/dein
   rm ./installer.sh
+
+  echo 'Install n'
+  brew install n
+  sudo n stable
 }
 
 setup_gitconfig() {

@@ -39,6 +39,7 @@ alias cat='cat -n'
 alias less='less -NM'
 alias c='clear'
 alias aws='docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli'
+alias grep='grep --exclude-dir={.terraform,plugins}'
 
 #############################################################
 # Homebrew
@@ -61,4 +62,3 @@ export PATH=$PATH:~/.bin
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
-

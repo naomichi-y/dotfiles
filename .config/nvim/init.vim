@@ -111,6 +111,11 @@ nnoremap <silent> <C-n> :call Setnumber()<CR>
 " CSVデリミタをカンマで表示
 let g:csv_no_conceal =1
 
+" Go言語
+autocmd FileType go setlocal noexpandtab
+autocmd FileType go setlocal tabstop=4
+autocmd FileType go setlocal shiftwidth=4
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 編集
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

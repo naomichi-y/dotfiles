@@ -6,7 +6,7 @@ confirm_delete() {
     echo "$1 is exists. do you want to overwrite? (y/n)"
     read answer
 
-    if [ $answer == 'y' ]; then
+    if [ $answer = 'y' ]; then
       rm $1
     else
       exit 1;
@@ -51,7 +51,7 @@ setup_neovim() {
   echo 'Install deain.vim'
   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
   sh ./installer.sh ~/.cache/dein
-  rm ./installer.sh
+  rm -f ./installer.sh
 
   echo 'Install n'
   brew install n

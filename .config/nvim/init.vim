@@ -93,7 +93,7 @@ set laststatus=2
 set statusline=%F%m%r%h%w\%=\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 
 " 1行辺りの解析文字数 (長い文字列でVimが遅くなる現象を回避)
-set synmaxcol=256
+set synmaxcol=384
 
 " PHPのショートタグをハイライトから除外
 let php_noShortTags = 1

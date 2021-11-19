@@ -1,5 +1,4 @@
 # dotfiles
---------
 
 ## Required tools
 
@@ -10,17 +9,16 @@
 
 ### Base
 
-```
-$ ./installer
+```bash
+$ ./installer.sh
 ```
 
 ### iTerm2
 
-
 #### Change font
 
 1. Open `Preferences`-`Profiles`-`Text`tab from menu bar.
-2. Specify `Ricty` in `Font`
+2. Specify `Ricty for Powerline` in `Font`
 
 #### Change color
 

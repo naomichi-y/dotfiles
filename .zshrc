@@ -49,11 +49,30 @@ if [ -f $(brew --prefix)/etc/brew-wrap ];then
 fi
 
 #############################################################
+# Powerline
+#############################################################
+function powerline_precmd() {
+  PS1="$(powerline-shell --shell zsh $?)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ]; then
+  install_powerline_precmd
+fi
+
+#############################################################
 # EXPORT
 #############################################################
 export LANG=ja_JP.UTF-8
 export CLICOLOR=1
-export LSCOLORS=DxGxcxdxCxegedabagacad
 export PATH=$PATH:~/.bin
 
 #############################################################

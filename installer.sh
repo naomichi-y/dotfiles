@@ -16,25 +16,26 @@ confirm_delete() {
 
 setup_init() {
   echo 'Install Homebrew'
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  echo 'Install required tools'
-  brew install telnet
+  echo 'Install Powerline'
+  pip3 install powerline-shell
 
   echo 'Install Ricty font'
   brew tap sanemat/font
-  brew install ricty
+  brew install ricty --with-powerline
+  cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+  fc-cache -vf
 }
 
-setup_shell() {
-  echo 'Setup ~/.zshrc'
-  confirm_delete ~/.zshrc
-
-  ln -s ${BASE_PATH}/.zshrc ~/.zshrc
+setup_config() {
   echo 'Create ~/.zshrc'
+  confirm_delete ~/.zshrc
+  ln -s ${BASE_PATH}/.zshrc ~/.zshrc
 
-  echo 'Change shell'
-  chsh -s /bin/zsh
+  echo 'Create Brewfile'
+  confirm_delete ~/Brewfile
+  ln -s ${BASE_PATH}/Brewfile ~/Brewfile
 }
 
 setup_neovim() {
@@ -89,7 +90,7 @@ setup_tmux_conf() {
 readonly BASE_PATH=$(cd $(dirname $0);pwd)
 
 setup_init
-setup_shell
+setup_config
 setup_neovim
 setup_gitconfig
 # setup_tmux_conf

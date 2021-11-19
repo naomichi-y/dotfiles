@@ -1,6 +1,10 @@
 #!/bin/bash
 set -eu
 
+DOTFILE_DIR=$(cd $(dirname $0);pwd)
+SRC_DIR="${DOTFILE_DIR}/src"
+TMP_DIR="${DOTFILE_DIR}/tmp"
+
 confirm_delete() {
   if [ -e $1 -o -L $1 ]; then
     echo "$1 is exists. do you want to overwrite? (y/n)"
@@ -14,85 +18,70 @@ confirm_delete() {
   fi
 }
 
-setup_init() {
-  echo 'Install Homebrew'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#######################################################################
+# ~/.configディレクトリの作成
+#######################################################################
+echo 'Create ~/.config'
+mkdir -p ~/.config
 
-  echo 'Install Powerline'
-  pip3 install powerline-shell
+#######################################################################
+# Homebrewのインストール
+#######################################################################
+echo 'Install Homebrew'
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  echo 'Install Ricty font'
-  brew tap sanemat/font
-  brew install ricty --with-powerline
-  cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-  fc-cache -vf
-}
+#######################################################################
+# Powerlineのインストール
+#######################################################################
+echo 'Install Powerline'
+pip3 install powerline-shell
 
-setup_config() {
-  echo 'Create ~/.zshrc'
-  confirm_delete ~/.zshrc
-  ln -s ${BASE_PATH}/.zshrc ~/.zshrc
+echo 'Create ~/.config/powerline-shell'
+confirm_delete ~/.config/powerline-shell
+ln -s ${SRC_DIR}/.config/powerline-shell ~/.config
 
-  echo 'Create Brewfile'
-  confirm_delete ~/Brewfile
-  ln -s ${BASE_PATH}/Brewfile ~/Brewfile
-}
+#######################################################################
+# Rictyのインストール
+#######################################################################
+echo 'Install Ricty font'
+brew tap sanemat/font
+brew install ricty --with-powerline
+cp -Rf /opt/homebrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+fc-cache -vf
 
-setup_neovim() {
-  echo 'Install neovim'
-  brew install neovim
+#######################################################################
+# .zshrcファイルの作成
+#######################################################################
+echo 'Create ~/.zshrc'
+confirm_delete ~/.zshrc
+ln -s ${SRC_DIR}/.zshrc ~/.zshrc
 
-  echo 'Install required libraries'
-  pip3 install -U msgpack-python
+#######################################################################
+# Brewfileファイルの作成とパッケージのインストール
+#######################################################################
+echo 'Create ~/Brewfile'
+confirm_delete ~/Brewfile
+ln -s ${SRC_DIR}/Brewfile ~/Brewfile
+(cd $SRC_DIR; brew bundle)
 
-  mkdir -p ~/.config
-  confirm_delete ~/.config/nvim
-  ln -s ${BASE_PATH}/.config/nvim ~/.config
+#######################################################################
+# Deinのインストール
+#######################################################################
+echo 'Install dein.vim'
+mkdir ${TMP_DIR}
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${TMP_DIR}/installer.sh
+sh ${TMP_DIR}/installer.sh ~/.cache/dein
+rm -Rf ${TMP_DIR}
 
-  echo 'Install deain.vim'
-  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-  sh ./installer.sh ~/.cache/dein
-  rm -f ./installer.sh
+echo 'Create ~/.config/nvim'
+confirm_delete ~/.config/nvim
+ln -s ${SRC_DIR}/.config/nvim ~/.config
 
-  echo 'Install n'
-  brew install n
-  sudo n stable
-}
-
-setup_gitconfig() {
-  echo 'Setup ~/.gitconfig'
-  confirm_delete ~/.gitconfig
-  ln -s ${BASE_PATH}/.gitconfig ~/.gitconfig
-}
-
-setup_tmux_conf() {
-  echo 'Setup ~/tmux.conf'
-
-  if [ `which tmux` ]; then
-    confirm_delete ~/.tmux.conf
-    ln -s ${BASE_PATH}/.tmux.conf ~/.tmux.conf
-
-    confirm_delete ~/.tmux
-    ln -s ${BASE_PATH}/.tmux ~/.tmux
-
-    if [ -d ~/.tmux/plugins/tpm ]; then
-      rm -Rf ~/.tmux/plugins/tpm
-    fi
-
-    git clone https://github.com/tmux-plugins/tpm ${BASE_PATH}/.tmux/plugins/tpm
-    tmux source ~/.tmux.conf
-    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-  else
-    echo 'tmux command is not found.'
-  fi
-}
-
-readonly BASE_PATH=$(cd $(dirname $0);pwd)
-
-setup_init
-setup_config
-setup_neovim
-setup_gitconfig
-# setup_tmux_conf
+#######################################################################
+# ~/.gitconfigファイルの作成
+#######################################################################
+echo 'Setup ~/.gitconfig'
+confirm_delete ~/.gitconfig
+ln -s ${SRC_DIR}/.gitconfig ~/.gitconfig
 
 echo 'Installation is completed.'

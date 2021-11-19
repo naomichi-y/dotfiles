@@ -1,5 +1,7 @@
 brew "awscli"
+brew "deno"
 brew "mas"
+brew "neovim"
 brew "telnet"
 
 cask "alfred"

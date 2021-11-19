@@ -1,13 +1,7 @@
 #############################################################
 # ZSH
 #############################################################
-
-PROMPT="%F{038}[%n@%m]%f %~
-%# "
-
-setopt no_beep
-
-# ヒストリ
+# 履歴
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -35,24 +29,17 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias vi='nvim'
-alias cat='cat -n'
-alias less='less -NM'
 alias c='clear'
-alias aws='docker run --rm -ti -v ~/.aws:/root/.aws amazon/aws-cli'
-alias grep='grep --exclude-dir={.terraform,plugins}'
-
-#############################################################
-# Homebrew
-#############################################################
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
-fi
+# alias grep='grep --exclude-dir={.terraform,plugins}'
 
 #############################################################
 # Powerline
 #############################################################
 function powerline_precmd() {
-  PS1="$(powerline-shell --shell zsh $?)"
+PS1="
+$(powerline-shell --shell zsh $?)
+$ "
+
 }
 
 function install_powerline_precmd() {
@@ -71,9 +58,7 @@ fi
 #############################################################
 # EXPORT
 #############################################################
-export LANG=ja_JP.UTF-8
 export CLICOLOR=1
-export PATH=$PATH:~/.bin
 
 #############################################################
 # Load local setting

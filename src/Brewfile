@@ -5,6 +5,8 @@ brew "neovim"
 brew "telnet"
 
 cask "alfred"
+cask "bettertouchtool"
+cask "appcleaner"
 cask "docker"
 cask "dropbox"
 cask "hyperswitch"
@@ -14,7 +16,10 @@ cask "iterm2"
 cask "karabiner-elements"
 cask "notion"
 cask "openvpn-connect"
+cask "sequel-ace"
 cask "slack"
+cask "skitch"
+cask "visual-studio-code"
 
 mas "Irvue", id: 1039633667
 mas "LINE", id: 539883307

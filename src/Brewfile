@@ -20,6 +20,7 @@ cask "sequel-ace"
 cask "slack"
 cask "skitch"
 cask "visual-studio-code"
+cask "vlc"
 
 mas "Irvue", id: 1039633667
 mas "LINE", id: 539883307

@@ -19,15 +19,27 @@ confirm_delete() {
 }
 
 #######################################################################
-# Spotlightを無効化
+# OSの設定変更
 #######################################################################
+echo 'Setup system settings'
+
+# キーリピート開始までの認識速度
+defaults write NSGlobalDomain InitialKeyRepeat -int 13
+
+# キーリピートの速度
+defaults write -g KeyRepeat -int 1
+
+# Spotlightを無効化
 sudo mdutil -a -i off
 
-#######################################################################
 # 隠しファイルを表示
-#######################################################################
 defaults write com.apple.finder AppleShowAllFiles -bool true
-killall Finder
+
+# Finderでパスを表示
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Finderでステータスバーを表示
+defaults write com.apple.finder ShowStatusBar -bool true
 
 #######################################################################
 # ~/.configディレクトリの作成

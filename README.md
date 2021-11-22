@@ -10,7 +10,7 @@
 ### Base
 
 ```bash
-$ ./installer.sh
+$ ./setup.sh
 ```
 
 ### iTerm2

@@ -32,6 +32,9 @@ alias vi='nvim'
 alias c='clear'
 # alias grep='grep --exclude-dir={.terraform,plugins}'
 
+# timeコマンドの実行結果を読みやすくする
+TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*Us\nsystem  : %*Ss\ntotal   : %*Es\n========================\n'
+
 #############################################################
 # Powerline
 #############################################################

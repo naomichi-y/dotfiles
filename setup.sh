@@ -29,9 +29,6 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 13
 # キーリピートの速度
 defaults write -g KeyRepeat -int 1
 
-# Spotlightを無効化
-sudo mdutil -a -i off
-
 # 隠しファイルを表示
 defaults write com.apple.finder AppleShowAllFiles -bool true
 

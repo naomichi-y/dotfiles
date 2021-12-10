@@ -30,7 +30,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias vi='nvim'
 alias c='clear'
-# alias grep='grep --exclude-dir={.terraform,plugins}'
+alias grep='grep --exclude-dir={.terraform,plugins}'
 
 # timeコマンドの実行結果を読みやすくする
 TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*Us\nsystem  : %*Ss\ntotal   : %*Es\n========================\n'
@@ -62,6 +62,7 @@ fi
 # EXPORT
 #############################################################
 export CLICOLOR=1
+export PATH=~/bin:$PATH
 
 #############################################################
 # Load local setting

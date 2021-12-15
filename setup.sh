@@ -38,6 +38,9 @@ defaults write com.apple.finder ShowPathbar -bool true
 # Finderでステータスバーを表示
 defaults write com.apple.finder ShowStatusBar -bool true
 
+# 通知バナーの表示時間
+defaults write com.apple.notificationcenterui bannerTime 10
+
 #######################################################################
 # ~/.configディレクトリの作成
 #######################################################################

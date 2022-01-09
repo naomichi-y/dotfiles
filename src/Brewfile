@@ -1,39 +1,51 @@
-brew "awscli"
-brew "deno"
-brew "docker"
-brew "docker-compose"
-brew "lima"
-
-# brewからMac App Storeで公開されているアプリを管理する
-brew "mas"
-
-brew "nmap"
 brew "neovim"
-brew "telnet"
+brew "deno"
 
-cask "alfred"
-cask "appcleaner"
-cask "bettertouchtool"
-# cask "docker"
-cask "dropbox"
-cask "hyperswitch"
-cask "google-chrome"
-cask "google-japanese-ime"
-cask "iterm2"
-cask "karabiner-elements"
-cask "microsoft-office"
-cask "microsoft-remote-desktop"
-cask "notion"
-cask "openvpn-connect"
-cask "qfinder-pro"
-cask "sequel-ace"
-cask "slack"
-cask "skitch"
-cask "visual-studio-code"
-cask "vlc"
+if OS.mac?
+  ######################################################################
+  # brew
+  ######################################################################
+  brew "awscli"
+  brew "docker"
+  brew "docker-compose"
+  brew "lima"
 
-# experimental
-brew "go"
+  # brewからMac App Storeで公開されているアプリを管理する
+  brew "mas"
 
-mas "Irvue", id: 1039633667
-mas "LINE", id: 539883307
+  brew "nmap"
+  brew "telnet"
+
+  ######################################################################
+  # cask
+  ######################################################################
+  cask "alfred"
+  cask "appcleaner"
+  cask "bettertouchtool"
+  # cask "docker"
+  cask "dropbox"
+  cask "hyperswitch"
+  cask "google-chrome"
+  cask "google-japanese-ime"
+  cask "iterm2"
+  cask "karabiner-elements"
+  cask "microsoft-office"
+  cask "microsoft-remote-desktop"
+  cask "notion"
+  cask "openvpn-connect"
+  cask "qfinder-pro"
+  cask "sequel-ace"
+  cask "slack"
+  cask "skitch"
+  cask "visual-studio-code"
+  cask "vlc"
+
+  # experimental
+  brew "go"
+
+  ######################################################################
+  # mas
+  ######################################################################
+  mas "Irvue", id: 1039633667
+  mas "LINE", id: 539883307
+end

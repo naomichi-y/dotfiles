@@ -1,3 +1,12 @@
+if [ "$(uname)" = "Darwin" ]; then
+  readonly OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+  readonly OS='Linux'
+else
+  echo "Unsupported platform."
+  exit 1
+fi
+
 #############################################################
 # ZSH
 #############################################################
@@ -63,6 +72,10 @@ fi
 #############################################################
 export CLICOLOR=1
 export PATH=~/bin:$PATH
+
+if [ "$OS" = "Linux" ]; then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
 
 #############################################################
 # Load local setting

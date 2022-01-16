@@ -13,11 +13,11 @@ end
 
 brew "neovim"
 brew "deno"
+brew "telnet"
+brew "tmux"
+brew "nmap"
 
 if OS.mac?
-  ######################################################################
-  # brew
-  ######################################################################
   brew "awscli"
   brew "docker"
   brew "docker-compose"
@@ -26,16 +26,6 @@ if OS.mac?
   # brewからMac App Storeで公開されているアプリを管理する
   brew "mas"
 
-  brew "telnet"
-  brew "tmux"
-
-  if is_home?
-    brew "nmap"
-  end
-
-  ######################################################################
-  # cask
-  ######################################################################
   cask "alfred"
   cask "appcleaner"
   cask "bettertouchtool"
@@ -63,9 +53,6 @@ if OS.mac?
     cask "vlc"
   end
 
-  ######################################################################
-  # mas
-  ######################################################################
   mas "Irvue", id: 1039633667
   mas "LINE", id: 539883307
 end

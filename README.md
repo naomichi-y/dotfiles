@@ -11,6 +11,11 @@
 ### Base
 
 ```bash
+$ cp .env.default .env
+
+# Edit
+$ vi .env
+
 $ ./setup.sh
 ```
 

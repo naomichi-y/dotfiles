@@ -1,3 +1,16 @@
+File.open("#{ENV['HOME']}/.env").each do |line|
+  value = line.strip.split('=')
+  ENV[value[0]] = value[1]
+end
+
+def is_home?
+  ENV['LOCATION'] == 'home'
+end
+
+def is_office?
+  ENV['LOCATION'] == 'office'
+end
+
 brew "neovim"
 brew "deno"
 
@@ -13,8 +26,11 @@ if OS.mac?
   # brewからMac App Storeで公開されているアプリを管理する
   brew "mas"
 
-  brew "nmap"
   brew "telnet"
+
+  if is_home?
+    brew "nmap"
+  end
 
   ######################################################################
   # cask
@@ -25,7 +41,6 @@ if OS.mac?
   # cask "docker"
   cask "dropbox"
   cask "hyperswitch"
-  cask "google-chrome"
   cask "google-japanese-ime"
   cask "iterm2"
   cask "karabiner-elements"
@@ -33,15 +48,19 @@ if OS.mac?
   cask "microsoft-remote-desktop"
   cask "notion"
   cask "openvpn-connect"
-  cask "qfinder-pro"
   cask "sequel-ace"
-  cask "slack"
   cask "skitch"
   cask "visual-studio-code"
-  cask "vlc"
 
   # experimental
   brew "go"
+
+  if is_home?
+    cask "google-chrome"
+    cask "qfinder-pro"
+    cask "slack"
+    cask "vlc"
+  end
 
   ######################################################################
   # mas

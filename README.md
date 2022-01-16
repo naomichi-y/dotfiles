@@ -3,8 +3,7 @@
 ## Required tools
 
 * git
-* zsh
-* tmux (Optional)
+* zsh (Linux)
 
 ## Installation
 

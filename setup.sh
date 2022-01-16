@@ -35,7 +35,7 @@ if [ ! -e .env ]; then
 fi
 
 confirm_delete ~/.env
-cp .env ~/
+cp .env ~/.env
 
 ######################################################################
 # OSの設定変更
@@ -141,3 +141,10 @@ curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessi
 unzip sessionmanager-bundle.zip
 sudo ./sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
 rm -Rf ${TMP_DIR}
+
+#######################################################################
+# tmuxの設定ファイルを作成
+#######################################################################
+confirm_delete ~/.tmux.conf
+ln -s ${SRC_DIR}/.tmux.conf ~/.tmux.conf
+tmux source-file ~/.tmux.conf

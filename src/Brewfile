@@ -27,6 +27,7 @@ if OS.mac?
   brew "mas"
 
   brew "telnet"
+  brew "tmux"
 
   if is_home?
     brew "nmap"

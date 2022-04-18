@@ -25,6 +25,7 @@ if OS.mac?
 
   # brewからMac App Storeで公開されているアプリを管理する
   brew "mas"
+  brew "mongosh"
 
   cask "alfred"
   cask "appcleaner"
@@ -43,14 +44,12 @@ if OS.mac?
   cask "skitch"
   cask "visual-studio-code"
 
-  # experimental
-  brew "go"
-
   if is_home?
     cask "google-chrome"
     cask "qfinder-pro"
     cask "slack"
     cask "vlc"
+    cask "zoom"
   end
 
   mas "Irvue", id: 1039633667

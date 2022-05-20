@@ -21,6 +21,7 @@ if OS.mac?
   brew "awscli"
   brew "docker"
   brew "docker-compose"
+  brew "jq"
   brew "lima"
 
   # brewからMac App Storeで公開されているアプリを管理する
@@ -42,6 +43,7 @@ if OS.mac?
   cask "openvpn-connect"
   cask "sequel-ace"
   cask "skitch"
+  cask "todoist"
   cask "visual-studio-code"
 
   if is_home?

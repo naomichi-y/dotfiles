@@ -26,12 +26,12 @@ if OS.mac?
   brew "mas"
   brew "mongosh"
 
+  cask "alt-tab"
   cask "alfred"
   cask "appcleaner"
   cask "bettertouchtool"
   cask "docker"
   cask "dropbox"
-#  cask "hyperswitch"
   cask "google-japanese-ime"
   cask "iterm2"
   cask "karabiner-elements"

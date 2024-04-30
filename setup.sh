@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
+
 set -eu
 
 if [ "$(uname)" = "Darwin" ]; then
-  readonly OS='Mac'
+  readonly OS_TYPE='Mac'
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-  readonly OS='Linux'
+  readonly OS_TYPE='Linux'
 else
   echo "Unsupported platform."
   exit 1
@@ -13,6 +14,8 @@ fi
 readonly DOTFILE_DIR=$(cd $(dirname $0);pwd)
 readonly SRC_DIR="${DOTFILE_DIR}/src"
 readonly TMP_DIR="${DOTFILE_DIR}/tmp"
+
+export PATH=/opt/homebrew/bin:$PATH
 
 confirm_delete() {
   if [ -e $1 -o -L $1 ]; then
@@ -40,7 +43,7 @@ cp .env ~/.env
 ######################################################################
 # OSの設定変更
 ######################################################################
-if [ "$OS" = "Mac" ]; then
+if [ "$OS_TYPE" = "Mac" ]; then
   echo 'Setup system settings'
 
   # キーリピート開始までの認識速度
@@ -78,6 +81,10 @@ echo 'Install Homebrew'
 # Powerlineのインストール
 ######################################################################
 echo 'Install Powerline'
+
+python3 -m venv ~/.venv
+source ~/.venv/bin/activate
+
 sudo pip3 install powerline-shell
 
 echo 'Create ~/.config/powerline-shell'
@@ -85,22 +92,22 @@ confirm_delete ~/.config/powerline-shell
 ln -s ${SRC_DIR}/.config/powerline-shell ~/.config
 
 ######################################################################
+# .zshrcファイルの作成
+######################################################################
+echo 'Create ~/.zshrc'
+confirm_delete ~/.zshrc
+ln -s ${SRC_DIR}/.zshrc ~/.zshrc
+
+######################################################################
 # Rictyのインストール
 ######################################################################
-if [ "$OS" = "Mac" ]; then
+if [ "$OS_TYPE" = "Mac" ]; then
   echo 'Install Ricty font'
   brew tap sanemat/font
   brew install ricty --with-powerline
   cp -Rf /opt/homebrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
   fc-cache -vf
 fi
-
-######################################################################
-# .zshrcファイルの作成
-######################################################################
-echo 'Create ~/.zshrc'
-confirm_delete ~/.zshrc
-ln -s ${SRC_DIR}/.zshrc ~/.zshrc
 
 ######################################################################
 # Brewfileファイルの作成とパッケージのインストール

@@ -19,8 +19,6 @@ brew "nmap"
 
 if OS.mac?
   brew "awscli"
-  brew "docker"
-  brew "docker-compose"
   brew "jq"
   brew "lima"
 
@@ -31,9 +29,9 @@ if OS.mac?
   cask "alfred"
   cask "appcleaner"
   cask "bettertouchtool"
-  # cask "docker"
+  cask "docker"
   cask "dropbox"
-  cask "hyperswitch"
+#  cask "hyperswitch"
   cask "google-japanese-ime"
   cask "iterm2"
   cask "karabiner-elements"

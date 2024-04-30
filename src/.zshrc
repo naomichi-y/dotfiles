@@ -1,7 +1,7 @@
 if [ "$(uname)" = "Darwin" ]; then
-  readonly OS='Mac'
+  readonly OS_TYPE='Mac'
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-  readonly OS='Linux'
+  readonly OS_TYPE='Linux'
 else
   echo "Unsupported platform."
   exit 1
@@ -71,9 +71,9 @@ fi
 # EXPORT
 #############################################################
 export CLICOLOR=1
-export PATH=~/bin:$PATH
+export PATH=/opt/homebrew/bin:/bin:$PATH
 
-if [ "$OS" = "Linux" ]; then
+if [ "$OS_TYPE" = "Linux" ]; then
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 fi
 

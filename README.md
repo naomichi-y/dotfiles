@@ -3,13 +3,13 @@
 ## Required tools
 
 * git
-* zsh (Linux)
+* zsh
 
 ## Installation
 
 ### Base
 
-```bash
+```zsh
 $ cp .env.default .env
 
 # Edit

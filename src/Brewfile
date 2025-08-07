@@ -12,21 +12,16 @@ def is_office?
 end
 
 brew "neovim"
-brew "deno"
 brew "telnet"
-brew "tmux"
 brew "nmap"
 
 if OS.mac?
   brew "awscli"
   brew "jq"
-  brew "lima"
 
   # brewからMac App Storeで公開されているアプリを管理する
   brew "mas"
-  brew "mongosh"
 
-  cask "alt-tab"
   cask "alfred"
   cask "appcleaner"
   cask "bettertouchtool"
@@ -36,20 +31,17 @@ if OS.mac?
   cask "iterm2"
   cask "karabiner-elements"
   cask "microsoft-office"
-  cask "microsoft-remote-desktop"
   cask "notion"
-  cask "openvpn-connect"
-  cask "sequel-ace"
   cask "skitch"
-  cask "todoist"
   cask "visual-studio-code"
+  cask "1password"
+  cask "zoom"
 
   if is_home?
     cask "google-chrome"
     cask "qfinder-pro"
     cask "slack"
     cask "vlc"
-    cask "zoom"
   end
 
   mas "Irvue", id: 1039633667

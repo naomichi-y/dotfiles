@@ -11,6 +11,7 @@ def is_office?
   ENV['LOCATION'] == 'office'
 end
 
+brew "bash"
 brew "neovim"
 brew "telnet"
 brew "nmap"

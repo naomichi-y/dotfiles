@@ -10,12 +10,13 @@
 ### Base
 
 ```zsh
-$ cp .env.default .env
-
 # Edit
 $ vi .env
 
 $ ./setup.sh
+
+# すべての確認をスキップして自動上書き
+$ ./setup.sh -y
 ```
 
 ### iTerm2
@@ -23,7 +24,7 @@ $ ./setup.sh
 #### Change font
 
 1. Open `Preferences`-`Profiles`-`Text`tab from menu bar.
-2. Specify `Ricty for Powerline` in `Font`
+2. Specify `HackGen` in `Font`
 
 #### Change color
 

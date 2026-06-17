@@ -11,21 +11,30 @@ else
   exit 1
 fi
 
-readonly DOTFILE_DIR=$(cd $(dirname $0);pwd)
+readonly DOTFILE_DIR=$(cd "$(dirname "$0")"; pwd)
 readonly SRC_DIR="${DOTFILE_DIR}/src"
 readonly TMP_DIR="${DOTFILE_DIR}/tmp"
 
 export PATH=/opt/homebrew/bin:$PATH
 
-confirm_delete() {
-  if [ -e $1 -o -L $1 ]; then
-    echo "$1 is exists. do you want to overwrite? (y/n)"
-    read answer
+AUTO_YES=false
+if [ "${1:-}" = "-y" ] || [ "${1:-}" = "--yes" ]; then
+  AUTO_YES=true
+fi
 
-    if [ $answer = 'y' ]; then
-      rm -rf $1
+confirm_delete() {
+  if [ -e "$1" -o -L "$1" ]; then
+    if [ "$AUTO_YES" = true ]; then
+      rm -rf "$1"
     else
-      exit 1;
+      echo "$1 already exists. do you want to overwrite? (y/n)"
+      read answer </dev/tty
+
+      if [ "$answer" = 'y' ]; then
+        rm -rf "$1"
+      else
+        exit 1;
+      fi
     fi
   fi
 }
@@ -83,6 +92,10 @@ setup_os() {
 # Homebrewのインストール
 ######################################################################
 setup_homebrew() {
+  if command -v brew &>/dev/null; then
+    echo 'Homebrew already installed. Skipping.'
+    return
+  fi
   echo 'Install Homebrew'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
@@ -93,26 +106,29 @@ setup_homebrew() {
 setup_powerline() {
   echo 'Install Powerline'
 
+  confirm_delete ~/.venv
   python3 -m venv ~/.venv
   source ~/.venv/bin/activate
 
-  sudo pip3 install powerline-shell
+  pip3 install powerline-shell
 
   echo 'Create ~/.config/powerline-shell'
   confirm_delete ~/.config/powerline-shell
-  ln -s ${SRC_DIR}/.config/powerline-shell ~/.config
+  ln -s ${SRC_DIR}/.config/powerline-shell ~/.config/powerline-shell
 }
 
 ######################################################################
-# Rictyのインストール
+# HackGenのインストール
 ######################################################################
-setup_ricty() {
+setup_hackgen() {
   if [ "$OS_TYPE" = "Mac" ]; then
-    echo 'Install Ricty font'
-    brew tap sanemat/font
-    brew install ricty --with-powerline
-    cp -Rf /opt/homebrew/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-    fc-cache -vf
+    echo 'Install HackGen font'
+    mkdir -p ${TMP_DIR}
+    local version=$(curl -s https://api.github.com/repos/yuru7/HackGen/releases/latest | grep '"tag_name"' | sed 's/.*"tag_name": "\(.*\)".*/\1/')
+    curl -L "https://github.com/yuru7/HackGen/releases/download/${version}/HackGen_${version}.zip" -o "${TMP_DIR}/HackGen.zip"
+    unzip "${TMP_DIR}/HackGen.zip" -d "${TMP_DIR}"
+    cp "${TMP_DIR}/HackGen_${version}"/*.ttf ~/Library/Fonts/
+    rm -Rf ${TMP_DIR}
   fi
 }
 
@@ -132,29 +148,48 @@ setup_brew() {
 setup_dein() {
   echo 'Install dein.vim'
   confirm_delete ~/.cache/dein
-  mkdir -p ${TMP_DIR}
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh)"
+  printf '1\n2\n' | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh)"
 
-#  echo 'Create ~/.cache/nvim'
-#  ln -s ${SRC_DIR}/.config/nvim ~/.cache
+  echo 'Create ~/.config/nvim'
+  confirm_delete ~/.config/nvim
+  ln -s ${SRC_DIR}/.config/nvim ~/.config/nvim
+}
+
+#######################################################################
+# AWS Session Manager Pluginのインストール
+#######################################################################
+######################################################################
+# Rubyのインストール
+######################################################################
+readonly RUBY_VERSION='3.3'
+
+setup_ruby() {
+  echo 'Install Ruby'
+  eval "$(rbenv init -)"
+  rbenv install --skip-existing "${RUBY_VERSION}"
+  rbenv global "${RUBY_VERSION}"
 }
 
 #######################################################################
 # AWS Session Manager Pluginのインストール
 #######################################################################
 setup_session_manager_plugin() {
+  if [ "$OS_TYPE" != "Mac" ]; then
+    return
+  fi
   echo 'Setup AWS Session Manager Plugin'
   mkdir -p ${TMP_DIR}
-  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "sessionmanager-bundle.zip"
-  unzip sessionmanager-bundle.zip
-  sudo ./sessionmanager-bundle/install -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
+  curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/mac/sessionmanager-bundle.zip" -o "${TMP_DIR}/sessionmanager-bundle.zip"
+  unzip "${TMP_DIR}/sessionmanager-bundle.zip" -d "${TMP_DIR}"
+  sudo "${TMP_DIR}/sessionmanager-bundle/install" -i /usr/local/sessionmanagerplugin -b /usr/local/bin/session-manager-plugin
   rm -Rf ${TMP_DIR}
 }
 
-#setup_os
-#setup_homebrew
-#setup_powerline
-#setup_ricty
-#setup_brew
-#setup_dein
-#setup_session_manager_plugin
+setup_os
+setup_homebrew
+setup_powerline
+setup_hackgen
+setup_brew
+setup_ruby
+setup_dein
+setup_session_manager_plugin

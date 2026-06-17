@@ -8,7 +8,10 @@ hook_source = '''
       \ '<TAB>' : ddc#manual_complete()
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-  call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip', 'file'])
+  " 補完候補の表示UI (新しいddcはUIプラグインが必須)
+  call ddc#custom#patch_global('ui', 'native')
+
+  call ddc#custom#patch_global('sources', ['lsp', 'around', 'file'])
   call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
         \   'matchers': ['matcher_head'],
@@ -20,7 +23,7 @@ hook_source = '''
         \   'isVolatile': v:true,
         \   'forceCompletionPattern': '\S/\S*',
         \ },
-        \ 'nvim-lsp': {
+        \ 'lsp': {
         \ 'mark': 'LSP',
         \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
         \ },
@@ -49,6 +52,15 @@ hook_source = '''
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
+on_event = 'InsertEnter'
+hook_source = '''
+  " 遅延ロード時はVimEnterを過ぎているため、サーバーを明示的に起動する
+  call denops#server#connect_or_start()
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-native'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-around'

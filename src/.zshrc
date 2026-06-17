@@ -47,6 +47,7 @@ TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*
 #############################################################
 # Powerline
 #############################################################
+source ~/.venv/bin/activate
 function powerline_precmd() {
 PS1="
 $(powerline-shell --shell zsh $?)
@@ -66,6 +67,12 @@ function install_powerline_precmd() {
 if [ "$TERM" != "linux" ]; then
   install_powerline_precmd
 fi
+
+#############################################################
+# rbenv
+#############################################################
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 #############################################################
 # EXPORT

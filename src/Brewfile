@@ -23,6 +23,7 @@ brew "deno"
 brew "hashicorp/tap/terraform"
 brew "telnet"
 brew "nmap"
+brew "saml2aws"
 
 if OS.mac?
   brew "awscli"
@@ -43,6 +44,7 @@ if OS.mac?
   cask "karabiner-elements"
   cask "microsoft-office"
   cask "notion"
+  cask "shottr"
   cask "visual-studio-code"
   cask "1password"
   cask "vlc"
